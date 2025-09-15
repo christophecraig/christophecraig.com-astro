@@ -1,0 +1,146 @@
+---
+import { SpotifyService } from '../services/spotify.ts';
+
+const spotifyService = new SpotifyService();
+const featuredPlaylists = await spotifyService.getFeaturedPlaylists(5);
+const newReleases = await spotifyService.getNewReleases(5);
+---
+
+<div class="spotify-section">
+  <h2>Music I'm Into</h2>
+  
+  <div class="spotify-content">
+    {featuredPlaylists.length > 0 && (
+      <div class="spotify-category">
+        <h3>Featured Playlists</h3>
+        <ul class="spotify-list">
+          {featuredPlaylists.map((playlist) => (
+            <li class="spotify-item">
+              <a href={playlist.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="spotify-link">
+                {playlist.images && playlist.images[0] && (
+                  <img src={playlist.images[0].url} alt={playlist.name} width="50" height="50" class="spotify-image" />
+                )}
+                <span class="spotify-text">
+                  <strong>{playlist.name}</strong>
+                  <span class="spotify-description">{playlist.description}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {newReleases.length > 0 && (
+      <div class="spotify-category">
+        <h3>New Releases</h3>
+        <ul class="spotify-list">
+          {newReleases.map((album) => (
+            <li class="spotify-item">
+              <a href={album.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="spotify-link">
+                {album.images && album.images[0] && (
+                  <img src={album.images[0].url} alt={album.name} width="50" height="50" class="spotify-image" />
+                )}
+                <span class="spotify-text">
+                  <strong>{album.name}</strong>
+                  <span class="spotify-artist">{album.artists.map(artist => artist.name).join(', ')}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {featuredPlaylists.length === 0 && newReleases.length === 0 && (
+      <p class="spotify-empty">Check out some great music on Spotify!</p>
+    )}
+  </div>
+</div>
+
+<style>
+  .spotify-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
+
+  .spotify-section h2 {
+    margin-top: 0;
+    color: #1db954;
+  }
+
+  .spotify-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .spotify-category {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .spotify-category h3 {
+    margin-top: 0;
+    color: #191414;
+  }
+
+  .spotify-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .spotify-item {
+    margin-bottom: 1rem;
+  }
+
+  .spotify-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .spotify-link:hover {
+    background-color: rgba(29, 185, 84, 0.1);
+  }
+
+  .spotify-image {
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .spotify-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .spotify-description,
+  .spotify-artist {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .spotify-empty {
+    color: #666;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .spotify-content {
+      flex-direction: column;
+    }
+    
+    .spotify-category {
+      min-width: 100%;
+    }
+  }
+</style>

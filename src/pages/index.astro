@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import SpotifyTracks from '../components/SpotifyTracks.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -33,6 +34,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
 				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
 			</ul>
+			
+			<!-- Spotify Tracks Section -->
+			<SpotifyTracks />
+			
 			<p>
 				Have fun! If you get stuck, remember to
 				<a href="https://docs.astro.build/">read the docs</a>

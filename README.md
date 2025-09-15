@@ -14,6 +14,7 @@ Features:
 - ✅ Sitemap support
 - ✅ RSS Feed support
 - ✅ Markdown & MDX support
+- ✅ Spotify integration (featured playlists and new releases)
 
 ## 🚀 Project Structure
 
@@ -52,6 +53,23 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm preview`         | Preview your build locally, before deploying     |
 | `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Get help using the Astro CLI                     |
+
+## 🎵 Spotify Integration
+
+This blog includes a Spotify integration that displays featured playlists and new releases on the homepage.
+
+To enable the Spotify integration:
+
+1. Create a Spotify Developer account and app at https://developer.spotify.com/dashboard/
+2. Copy your Client ID and Client Secret
+3. Add them to your `.env` file:
+
+```env
+SPOTIFY_CLIENT_ID=your_client_id_here
+SPOTIFY_CLIENT_SECRET=your_client_secret_here
+```
+
+See [SPOTIFY_SETUP.md](SPOTIFY_SETUP.md) for detailed instructions.
 
 ## 👀 Want to learn more?
 
