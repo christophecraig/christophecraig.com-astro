@@ -70,7 +70,7 @@ SPOTIFY_CLIENT_SECRET=your_client_secret_here
 ```
 
 4. Update your Spotify app's redirect URI to match your deployment:
-   - For local development: `http://localhost:4324/api/auth/spotify/callback`
+   - For local development: `http://localhost:4321/api/auth/spotify/callback`
    - For production: `https://yourdomain.com/api/auth/spotify/callback`
 
 5. Authenticate with Spotify by visiting `/api/auth/spotify` on your site
