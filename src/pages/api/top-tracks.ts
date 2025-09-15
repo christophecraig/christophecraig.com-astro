@@ -2,25 +2,24 @@ import type { APIRoute } from 'astro';
 import { SpotifyService } from '../../services/spotify';
 
 export const GET: APIRoute = async ({ url }) => {
-  const accessToken = import.meta.env.SPOTIFY_ACCESS_TOKEN;
-  
-  if (!accessToken) {
-    return new Response(
-      JSON.stringify({
-        error: 'Spotify access token not configured'
-      }),
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-  }
-
   try {
     const spotifyService = new SpotifyService();
-    const tracks = await spotifyService.getUserTopTracks(accessToken, 10);
+    const tracks = await spotifyService.getUserTopTracks(10);
+    
+    // If we couldn't get tracks, return an empty array
+    if (!tracks || tracks.length === 0) {
+      return new Response(
+        JSON.stringify({
+          tracks: []
+        }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+    }
     
     return new Response(
       JSON.stringify({
@@ -46,10 +45,11 @@ export const GET: APIRoute = async ({ url }) => {
     console.error('Error fetching top tracks:', error);
     return new Response(
       JSON.stringify({
+        tracks: [],
         error: 'Failed to fetch top tracks'
       }),
       {
-        status: 500,
+        status: 200, // Still return 200 so the frontend can handle the empty state
         headers: {
           'Content-Type': 'application/json'
         }

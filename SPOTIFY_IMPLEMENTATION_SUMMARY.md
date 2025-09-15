@@ -11,25 +11,31 @@
    - Added caching to reduce API calls during development
    - Used Authorization Code Flow for user-specific data access
 
-3. **Authentication Flow**
+3. **Automatic Token Refresh**
+   - Implemented a complete refresh token flow
+   - Created token storage mechanism for persistence
+   - Added automatic token renewal when tokens expire
+
+4. **Authentication Flow**
    - Created a complete OAuth flow with Spotify
    - Implemented secure state parameter handling
-   - Added token exchange endpoint
+   - Added token exchange and storage endpoint
 
-4. **API Endpoints**
+5. **API Endpoints**
    - Created RESTful API endpoints for top tracks and recently played tracks
    - Implemented proper error handling and response formatting
+   - Added automatic token validation and refresh
 
-5. **UI Component**
+6. **UI Component**
    - Updated the SpotifyTracks Astro component to display user data
    - Added responsive styling for different screen sizes
    - Included links to Spotify for each track
 
-6. **Homepage Integration**
+7. **Homepage Integration**
    - Integrated the updated Spotify component into the main index page
    - Added appropriate styling that fits with the existing design
 
-7. **Documentation**
+8. **Documentation**
    - Created setup instructions in SPOTIFY_SETUP.md
    - Updated README with information about the Spotify integration
    - Added .env.example for configuration guidance
@@ -47,13 +53,9 @@ SPOTIFY_CLIENT_SECRET=your_client_secret_here
 
 4. Restart your development server
 5. Visit `http://localhost:4321/api/auth/spotify` to authenticate with Spotify
-6. Copy the access token and add it to your `.env` file:
+6. Grant permission for the app to read your top tracks and recently played tracks
 
-```
-SPOTIFY_ACCESS_TOKEN=your_access_token_here
-```
-
-7. Restart your development server again
+That's it! The refresh token will be automatically saved and used to refresh your access token whenever it expires.
 
 ## Technical details
 
@@ -67,10 +69,13 @@ Currently displaying:
 
 ## Token Management
 
-The access token expires after 1 hour. For a production deployment, you would want to implement a refresh token flow, but for a personal blog this manual refresh approach works fine.
+The implementation now includes automatic token refresh, so no manual intervention is required:
+- Access tokens are automatically refreshed when they expire
+- Refresh tokens are securely stored in a JSON file
+- The system handles token validation and renewal transparently
+- Visitors will always see your most up-to-date listening history
 
-To refresh your token:
-1. Visit `http://localhost:4321/api/auth/spotify` again
-2. Re-authenticate with Spotify
-3. Copy the new access token to your `.env` file
-4. Restart your development server
+For production deployments, you may want to consider:
+- Using a more secure storage mechanism for tokens
+- Implementing encryption for stored tokens
+- Adding monitoring for token refresh failures

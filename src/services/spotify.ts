@@ -1,4 +1,5 @@
 import { SpotifyApi } from '@spotify/web-api-ts-sdk';
+import { TokenStorage, SpotifyTokens } from './token-storage';
 
 // A simple cache to avoid repeated API calls during development
 const cache: Record<string, { data: any; timestamp: number }> = {};
@@ -7,10 +8,28 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 export class SpotifyService {
   private sdk: SpotifyApi | null = null;
   private userSdk: SpotifyApi | null = null;
+  private tokens: SpotifyTokens | null = null;
 
   constructor() {
     // Initialize the SDK if credentials are available
     this.initializeClientCredentials();
+    // Load existing tokens
+    this.loadTokens();
+  }
+
+  /**
+   * Load tokens from storage
+   */
+  private loadTokens() {
+    this.tokens = TokenStorage.loadTokens();
+  }
+
+  /**
+   * Save tokens to storage
+   */
+  private saveTokens(tokens: SpotifyTokens) {
+    this.tokens = tokens;
+    TokenStorage.saveTokens(tokens);
   }
 
   /**
@@ -36,6 +55,67 @@ export class SpotifyService {
   }
 
   /**
+   * Refresh the access token using the refresh token
+   */
+  async refreshAccessToken(): Promise<SpotifyTokens | null> {
+    if (!this.tokens?.refresh_token) {
+      console.error('No refresh token available');
+      return null;
+    }
+
+    const clientId = import.meta.env.SPOTIFY_CLIENT_ID;
+    const clientSecret = import.meta.env.SPOTIFY_CLIENT_SECRET;
+
+    if (!clientId || !clientSecret) {
+      console.error('Spotify client credentials not configured');
+      return null;
+    }
+
+    try {
+      const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa(`${clientId}:${clientSecret}`)
+        },
+        body: new URLSearchParams({
+          grant_type: 'refresh_token',
+          refresh_token: this.tokens.refresh_token
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Token refresh failed:', errorText);
+        return null;
+      }
+
+      const tokenData = await response.json();
+      
+      // Calculate expiration time (current time + expires_in seconds)
+      const expiresAt = Date.now() + (tokenData.expires_in * 1000);
+      
+      // Create updated tokens object
+      const updatedTokens: SpotifyTokens = {
+        access_token: tokenData.access_token,
+        refresh_token: this.tokens.refresh_token, // Keep the same refresh token
+        expires_at: expiresAt
+      };
+      
+      // Save the updated tokens
+      this.saveTokens(updatedTokens);
+      
+      // Reinitialize the user SDK with new access token
+      await this.initializeUserCredentials(updatedTokens.access_token);
+      
+      return updatedTokens;
+    } catch (error) {
+      console.error('Error refreshing access token:', error);
+      return null;
+    }
+  }
+
+  /**
    * Initialize the Spotify SDK with user access token
    * This is for accessing user-specific data
    */
@@ -45,7 +125,7 @@ export class SpotifyService {
         access_token: accessToken,
         token_type: 'Bearer',
         expires_in: 3600,
-        refresh_token: ''
+        refresh_token: this.tokens?.refresh_token || ''
       });
       return this.userSdk;
     } catch (error) {
@@ -55,9 +135,37 @@ export class SpotifyService {
   }
 
   /**
+   * Ensure we have a valid access token
+   * Refreshes the token if it's expired or about to expire
+   */
+  async ensureValidToken(): Promise<string | null> {
+    if (!this.tokens) {
+      console.error('No tokens available');
+      return null;
+    }
+
+    // Check if token is expired or will expire in the next 5 minutes
+    const now = Date.now();
+    const fiveMinutesFromNow = now + (5 * 60 * 1000);
+
+    if (this.tokens.expires_at < fiveMinutesFromNow) {
+      console.log('Token is expired or will expire soon, refreshing...');
+      const refreshedTokens = await this.refreshAccessToken();
+      if (refreshedTokens) {
+        return refreshedTokens.access_token;
+      } else {
+        console.error('Failed to refresh token');
+        return null;
+      }
+    }
+
+    return this.tokens.access_token;
+  }
+
+  /**
    * Get user's top tracks
    */
-  async getUserTopTracks(accessToken: string, limit = 10) {
+  async getUserTopTracks(limit = 10) {
     // Check cache first
     const cacheKey = `user-top-tracks-${limit}`;
     const cached = cache[cacheKey];
@@ -65,7 +173,14 @@ export class SpotifyService {
       return cached.data;
     }
 
-    // Initialize user SDK if not already done
+    // Ensure we have a valid token
+    const accessToken = await this.ensureValidToken();
+    if (!accessToken) {
+      console.error('Unable to get valid access token for user top tracks');
+      return [];
+    }
+
+    // Initialize user SDK if not already done or if token has changed
     if (!this.userSdk) {
       await this.initializeUserCredentials(accessToken);
     }
@@ -89,7 +204,7 @@ export class SpotifyService {
   /**
    * Get user's recently played tracks
    */
-  async getUserRecentlyPlayed(accessToken: string, limit = 10) {
+  async getUserRecentlyPlayed(limit = 10) {
     // Check cache first
     const cacheKey = `user-recently-played-${limit}`;
     const cached = cache[cacheKey];
@@ -97,7 +212,14 @@ export class SpotifyService {
       return cached.data;
     }
 
-    // Initialize user SDK if not already done
+    // Ensure we have a valid token
+    const accessToken = await this.ensureValidToken();
+    if (!accessToken) {
+      console.error('Unable to get valid access token for recently played tracks');
+      return [];
+    }
+
+    // Initialize user SDK if not already done or if token has changed
     if (!this.userSdk) {
       await this.initializeUserCredentials(accessToken);
     }

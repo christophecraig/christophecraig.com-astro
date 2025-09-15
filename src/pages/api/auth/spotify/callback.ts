@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { TokenStorage } from '../../../services/token-storage';
 
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
@@ -86,6 +87,16 @@ export const GET: APIRoute = async ({ request }) => {
 
     const tokenData = await tokenResponse.json();
     
+    // Calculate expiration time (current time + expires_in seconds)
+    const expiresAt = Date.now() + (tokenData.expires_in * 1000);
+    
+    // Save tokens to storage
+    TokenStorage.saveTokens({
+      access_token: tokenData.access_token,
+      refresh_token: tokenData.refresh_token,
+      expires_at: expiresAt
+    });
+    
     // Clear the state cookie
     const headers = new Headers();
     headers.append('Set-Cookie', 'spotify_auth_state=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
@@ -96,7 +107,7 @@ export const GET: APIRoute = async ({ request }) => {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Spotify Access Token</title>
+        <title>Spotify Authentication Complete</title>
         <style>
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -110,14 +121,12 @@ export const GET: APIRoute = async ({ request }) => {
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
           }
-          .token {
-            background-color: #e8f4f8;
-            border-left: 4px solid #1db954;
-            padding: 1rem;
-            margin: 1rem 0;
-            word-break: break-all;
-            font-family: monospace;
+          .success {
+            color: #1db954;
+            font-size: 3rem;
+            margin: 0;
           }
           .btn {
             display: inline-block;
@@ -134,41 +143,31 @@ export const GET: APIRoute = async ({ request }) => {
             background-color: #1ed760;
           }
           .note {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
+            background-color: #e8f4f8;
+            border-left: 4px solid #1db954;
             padding: 1rem;
             margin: 1rem 0;
+            text-align: left;
           }
         </style>
       </head>
       <body>
         <div class="container">
-          <h1>Spotify Access Token</h1>
-          <p>Your Spotify access token has been successfully generated:</p>
-          
-          <div class="token">
-            ${tokenData.access_token}
-          </div>
-          
-          <p><strong>Instructions:</strong></p>
-          <ol>
-            <li>Copy the access token above</li>
-            <li>Add it to your <code>.env</code> file as:</li>
-            <pre>SPOTIFY_ACCESS_TOKEN=${tokenData.access_token}</pre>
-            <li>Restart your development server</li>
-          </ol>
+          <h1 class="success">✓</h1>
+          <h1>Spotify Authentication Complete!</h1>
+          <p>Your Spotify credentials have been successfully configured.</p>
+          <p>The refresh token has been saved and will be used to automatically refresh your access token.</p>
           
           <div class="note">
-            <h3>Important:</h3>
+            <h3>What happens next:</h3>
             <ul>
-              <li>This access token will expire in 1 hour (${Math.floor(tokenData.expires_in / 60)} minutes)</li>
-              <li>For a production deployment, you would want to implement a refresh token flow</li>
-              <li>For a personal blog, you can manually refresh this token when needed</li>
-              <li>Keep this token secure and don't share it publicly</li>
+              <li>Your access token will be automatically refreshed when it expires</li>
+              <li>Your top tracks and recently played tracks will be displayed to all visitors</li>
+              <li>No manual intervention is required unless you revoke access</li>
             </ul>
           </div>
           
-          <a href="/" class="btn">Go to Homepage</a>
+          <a href="/" class="btn">View Your Music on the Homepage</a>
         </div>
       </body>
       </html>
