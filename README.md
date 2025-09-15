@@ -56,7 +56,7 @@ All commands are run from the root of the project, from a terminal:
 
 ## 🎵 Spotify Integration
 
-This blog includes a Spotify integration that displays featured playlists and new releases on the homepage.
+This blog includes a Spotify integration that displays your personal top tracks and recently played tracks on the homepage.
 
 To enable the Spotify integration:
 
@@ -69,7 +69,14 @@ SPOTIFY_CLIENT_ID=your_client_id_here
 SPOTIFY_CLIENT_SECRET=your_client_secret_here
 ```
 
-See [SPOTIFY_SETUP.md](SPOTIFY_SETUP.md) for detailed instructions.
+4. Update your Spotify app's redirect URI to match your deployment:
+   - For local development: `http://localhost:4324/api/auth/spotify/callback`
+   - For production: `https://yourdomain.com/api/auth/spotify/callback`
+
+5. Authenticate with Spotify by visiting `/api/auth/spotify` on your site
+6. Grant permission for the app to read your top tracks and recently played tracks
+
+See [SPOTIFY_SETUP.md](SPOTIFY_SETUP.md) for detailed instructions and [SPOTIFY_FIXES_SUMMARY.md](SPOTIFY_FIXES_SUMMARY.md) for recent fixes.
 
 ## 👀 Want to learn more?
 

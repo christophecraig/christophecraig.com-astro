@@ -10,26 +10,9 @@ interface Track {
   external_urls: { spotify: string };
 }
 
-let topTracks: Track[] = [];
-let recentlyPlayed: Track[] = [];
-
-try {
-  // Fetch top tracks
-  const topTracksResponse = await fetch('/api/top-tracks');
-  if (topTracksResponse.ok) {
-    const data = await topTracksResponse.json();
-    topTracks = data.tracks || [];
-  }
-
-  // Fetch recently played tracks
-  const recentlyPlayedResponse = await fetch('/api/recently-played');
-  if (recentlyPlayedResponse.ok) {
-    const data = await recentlyPlayedResponse.json();
-    recentlyPlayed = data.tracks || [];
-  }
-} catch (error) {
-  console.error('Error fetching Spotify data:', error);
-}
+// Use Astro.props to pass data from the page
+const { topTracks = [], recentlyPlayed = [] } = Astro.props;
+console.log({ topTracks })
 ---
 
 <div class="spotify-section">

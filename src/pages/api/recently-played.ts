@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { SpotifyService } from '../../services/spotify';
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ url }) => {
   try {
     const spotifyService = new SpotifyService();

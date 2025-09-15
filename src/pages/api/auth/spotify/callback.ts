@@ -1,10 +1,14 @@
 import type { APIRoute } from 'astro';
-import { TokenStorage } from '../../../services/token-storage';
+import { TokenStorage } from '../../../../services/token-storage';
+
+export const prerender = false;
 
 export const GET: APIRoute = async ({ request }) => {
+  console.log('Spotify callback endpoint hit');
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
+  console.log('Received parameters:', {url: url.toString(), code, state });
   
   // Get the stored state from cookies
   const cookieHeader = request.headers.get('cookie') || '';
@@ -15,8 +19,10 @@ export const GET: APIRoute = async ({ request }) => {
   }, {} as Record<string, string>);
   
   const storedState = cookies.spotify_auth_state;
+  console.log('Stored state from cookies:', storedState);
 
   if (!code) {
+    console.error('No authorization code received from Spotify');
     return new Response(
       'Error: No authorization code received from Spotify',
       {
@@ -29,6 +35,7 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   if (!state || state !== storedState) {
+    console.error('State mismatch - possible CSRF attack', { receivedState: state, storedState });
     return new Response(
       'Error: State mismatch - possible CSRF attack',
       {
@@ -44,7 +51,11 @@ export const GET: APIRoute = async ({ request }) => {
   const clientSecret = import.meta.env.SPOTIFY_CLIENT_SECRET;
   const redirectUri = `${url.origin}/api/auth/spotify/callback`;
 
+  console.log('Environment variables check:', { clientId: !!clientId, clientSecret: !!clientSecret });
+  console.log('Redirect URI:', redirectUri);
+
   if (!clientId || !clientSecret) {
+    console.error('Spotify Client ID and Client Secret must be configured in your .env file');
     return new Response(
       'Error: Spotify Client ID and Client Secret must be configured in your .env file',
       {
@@ -58,6 +69,7 @@ export const GET: APIRoute = async ({ request }) => {
 
   try {
     // Exchange the authorization code for an access token
+    console.log('Attempting to exchange authorization code for access token');
     const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       headers: {
@@ -70,6 +82,8 @@ export const GET: APIRoute = async ({ request }) => {
         redirect_uri: redirectUri
       })
     });
+
+    console.log('Token exchange response status:', tokenResponse.status);
 
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
@@ -86,16 +100,20 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     const tokenData = await tokenResponse.json();
+    console.log('Received token data:', tokenData);
     
     // Calculate expiration time (current time + expires_in seconds)
     const expiresAt = Date.now() + (tokenData.expires_in * 1000);
+    console.log('Calculated expiration time:', expiresAt);
     
     // Save tokens to storage
+    console.log('Saving tokens to storage');
     TokenStorage.saveTokens({
       access_token: tokenData.access_token,
       refresh_token: tokenData.refresh_token,
       expires_at: expiresAt
     });
+    console.log('Tokens saved successfully');
     
     // Clear the state cookie
     const headers = new Headers();

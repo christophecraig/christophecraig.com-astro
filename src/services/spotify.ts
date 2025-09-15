@@ -165,9 +165,9 @@ export class SpotifyService {
   /**
    * Get user's top tracks
    */
-  async getUserTopTracks(limit = 10) {
+  async getUserTopTracks(limit = 10, timeRange: 'short_term' | 'medium_term' | 'long_term' = 'medium_term') {
     // Check cache first
-    const cacheKey = `user-top-tracks-${limit}`;
+    const cacheKey = `user-top-tracks-${limit}-${timeRange}`;
     const cached = cache[cacheKey];
     if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
       return cached.data;
@@ -188,7 +188,7 @@ export class SpotifyService {
     if (!this.userSdk) return [];
 
     try {
-      const response = await this.userSdk.currentUser.topItems('tracks', { limit });
+      const response = await this.userSdk.currentUser.topItems('tracks', timeRange, limit);
       const tracks = response.items;
       
       // Cache the result
@@ -227,7 +227,7 @@ export class SpotifyService {
     if (!this.userSdk) return [];
 
     try {
-      const response = await this.userSdk.currentUser.playback.getRecentlyPlayed(limit);
+      const response = await this.userSdk.player.getRecentlyPlayedTracks(limit);
       const tracks = response.items.map(item => item.track);
       
       // Cache the result
