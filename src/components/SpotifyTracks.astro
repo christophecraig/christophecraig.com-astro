@@ -1,28 +1,61 @@
 ---
-import { SpotifyService } from '../services/spotify.ts';
+interface Track {
+  id: string;
+  name: string;
+  artists: string[];
+  album: {
+    name: string;
+    images: { url: string; width: number; height: number }[];
+  };
+  external_urls: { spotify: string };
+}
 
-const spotifyService = new SpotifyService();
-const featuredPlaylists = await spotifyService.getFeaturedPlaylists(5);
-const newReleases = await spotifyService.getNewReleases(5);
+let topTracks: Track[] = [];
+let recentlyPlayed: Track[] = [];
+
+try {
+  // Fetch top tracks
+  const topTracksResponse = await fetch('/api/top-tracks');
+  if (topTracksResponse.ok) {
+    const data = await topTracksResponse.json();
+    topTracks = data.tracks || [];
+  }
+
+  // Fetch recently played tracks
+  const recentlyPlayedResponse = await fetch('/api/recently-played');
+  if (recentlyPlayedResponse.ok) {
+    const data = await recentlyPlayedResponse.json();
+    recentlyPlayed = data.tracks || [];
+  }
+} catch (error) {
+  console.error('Error fetching Spotify data:', error);
+}
 ---
 
 <div class="spotify-section">
   <h2>Music I'm Into</h2>
   
   <div class="spotify-content">
-    {featuredPlaylists.length > 0 && (
+    {topTracks.length > 0 && (
       <div class="spotify-category">
-        <h3>Featured Playlists</h3>
+        <h3>My Top Tracks</h3>
         <ul class="spotify-list">
-          {featuredPlaylists.map((playlist) => (
+          {topTracks.map((track) => (
             <li class="spotify-item">
-              <a href={playlist.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="spotify-link">
-                {playlist.images && playlist.images[0] && (
-                  <img src={playlist.images[0].url} alt={playlist.name} width="50" height="50" class="spotify-image" />
+              <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="spotify-link">
+                {track.album.images && track.album.images[0] && (
+                  <img 
+                    src={track.album.images[0].url} 
+                    alt={track.name} 
+                    width="50" 
+                    height="50" 
+                    class="spotify-image" 
+                    loading="lazy"
+                  />
                 )}
                 <span class="spotify-text">
-                  <strong>{playlist.name}</strong>
-                  <span class="spotify-description">{playlist.description}</span>
+                  <strong>{track.name}</strong>
+                  <span class="spotify-artist">{track.artists.join(', ')}</span>
                 </span>
               </a>
             </li>
@@ -31,19 +64,26 @@ const newReleases = await spotifyService.getNewReleases(5);
       </div>
     )}
 
-    {newReleases.length > 0 && (
+    {recentlyPlayed.length > 0 && (
       <div class="spotify-category">
-        <h3>New Releases</h3>
+        <h3>Recently Played</h3>
         <ul class="spotify-list">
-          {newReleases.map((album) => (
+          {recentlyPlayed.map((track) => (
             <li class="spotify-item">
-              <a href={album.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="spotify-link">
-                {album.images && album.images[0] && (
-                  <img src={album.images[0].url} alt={album.name} width="50" height="50" class="spotify-image" />
+              <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="spotify-link">
+                {track.album.images && track.album.images[0] && (
+                  <img 
+                    src={track.album.images[0].url} 
+                    alt={track.name} 
+                    width="50" 
+                    height="50" 
+                    class="spotify-image" 
+                    loading="lazy"
+                  />
                 )}
                 <span class="spotify-text">
-                  <strong>{album.name}</strong>
-                  <span class="spotify-artist">{album.artists.map(artist => artist.name).join(', ')}</span>
+                  <strong>{track.name}</strong>
+                  <span class="spotify-artist">{track.artists.join(', ')}</span>
                 </span>
               </a>
             </li>
@@ -52,7 +92,7 @@ const newReleases = await spotifyService.getNewReleases(5);
       </div>
     )}
 
-    {featuredPlaylists.length === 0 && newReleases.length === 0 && (
+    {topTracks.length === 0 && recentlyPlayed.length === 0 && (
       <p class="spotify-empty">Check out some great music on Spotify!</p>
     )}
   </div>
@@ -123,7 +163,6 @@ const newReleases = await spotifyService.getNewReleases(5);
     gap: 0.25rem;
   }
 
-  .spotify-description,
   .spotify-artist {
     font-size: 0.875rem;
     color: #666;

@@ -6,21 +6,30 @@
    - Installed the official Spotify Web API TypeScript SDK
    - Created a service layer to interact with the Spotify API
 
-2. **Public Data Fetching**
-   - Implemented fetching of featured playlists and new releases
+2. **User Data Fetching**
+   - Implemented fetching of user's top tracks and recently played tracks
    - Added caching to reduce API calls during development
-   - Used client credentials flow for public data access (no user authentication required)
+   - Used Authorization Code Flow for user-specific data access
 
-3. **UI Component**
-   - Created a SpotifyTracks Astro component to display the data
+3. **Authentication Flow**
+   - Created a complete OAuth flow with Spotify
+   - Implemented secure state parameter handling
+   - Added token exchange endpoint
+
+4. **API Endpoints**
+   - Created RESTful API endpoints for top tracks and recently played tracks
+   - Implemented proper error handling and response formatting
+
+5. **UI Component**
+   - Updated the SpotifyTracks Astro component to display user data
    - Added responsive styling for different screen sizes
-   - Included links to Spotify for each item
+   - Included links to Spotify for each track
 
-4. **Homepage Integration**
-   - Integrated the Spotify component into the main index page
+6. **Homepage Integration**
+   - Integrated the updated Spotify component into the main index page
    - Added appropriate styling that fits with the existing design
 
-5. **Documentation**
+7. **Documentation**
    - Created setup instructions in SPOTIFY_SETUP.md
    - Updated README with information about the Spotify integration
    - Added .env.example for configuration guidance
@@ -37,22 +46,31 @@ SPOTIFY_CLIENT_SECRET=your_client_secret_here
 ```
 
 4. Restart your development server
+5. Visit `http://localhost:4321/api/auth/spotify` to authenticate with Spotify
+6. Copy the access token and add it to your `.env` file:
+
+```
+SPOTIFY_ACCESS_TOKEN=your_access_token_here
+```
+
+7. Restart your development server again
 
 ## Technical details
 
-The implementation uses the client credentials flow which allows access to public Spotify data without user authentication. This makes it perfect for a public blog where you want to showcase music without requiring visitors to log in.
+The implementation uses the Authorization Code Flow which allows access to user-specific Spotify data. This requires the user to authenticate with Spotify and grant permission to read their top tracks and recently played tracks.
 
 The data is cached for 5 minutes to reduce API calls and improve performance during development.
 
 Currently displaying:
-- Featured playlists
-- New releases
+- User's top tracks
+- User's recently played tracks
 
-## Future enhancements
+## Token Management
 
-To display user-specific recently played tracks, you would need to implement the Authorization Code Flow with PKCE, which would require:
-1. A backend service to handle the OAuth flow
-2. User authentication on the frontend
-3. Storing and managing user tokens securely
+The access token expires after 1 hour. For a production deployment, you would want to implement a refresh token flow, but for a personal blog this manual refresh approach works fine.
 
-This was intentionally not implemented for this public blog template to keep things simple and avoid the complexity of user authentication.
+To refresh your token:
+1. Visit `http://localhost:4321/api/auth/spotify` again
+2. Re-authenticate with Spotify
+3. Copy the new access token to your `.env` file
+4. Restart your development server
