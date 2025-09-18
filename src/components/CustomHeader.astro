@@ -24,7 +24,18 @@ const isActive = (linkPath: string) => path === linkPath;
     <div class="nav-content">
       <h2><a href={homePath}>Christophe Craig</a></h2>
       
-      <div class="nav-links">
+      <!-- Hamburger menu button for mobile -->
+      <button 
+        class="mobile-menu-toggle" 
+        aria-label="Toggle navigation menu"
+        id="mobile-menu-toggle"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <div class="nav-links" id="nav-links">
         <a 
           href={homePath} 
           class={isActive(homePath) ? 'active' : ''}
@@ -43,12 +54,43 @@ const isActive = (linkPath: string) => path === linkPath;
         >
           {t.projects}
         </a>
+        <LanguageSwitcher {currentLang} {path} />
       </div>
-      
-      <LanguageSwitcher {currentLang} {path} />
     </div>
   </nav>
 </header>
+
+<script is:client>
+  const toggleButton = document.getElementById('mobile-menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  
+  if (toggleButton && navLinks) {
+    toggleButton.addEventListener('click', () => {
+      navLinks.classList.toggle('nav-links-open');
+      
+      // Update aria-expanded attribute for accessibility
+      const isExpanded = navLinks.classList.contains('nav-links-open');
+      toggleButton.setAttribute('aria-expanded', isExpanded.toString());
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!navLinks.contains(event.target) && !toggleButton.contains(event.target)) {
+        navLinks.classList.remove('nav-links-open');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+    
+    // Close menu when clicking on a link
+    const navLinksItems = navLinks.querySelectorAll('a');
+    navLinksItems.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('nav-links-open');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
 
 <style>
   header {
@@ -82,9 +124,28 @@ const isActive = (linkPath: string) => path === linkPath;
     font-weight: 700;
   }
   
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    z-index: 101;
+  }
+  
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: var(--accent-dark);
+    margin: 3px 0;
+    transition: 0.3s;
+  }
+  
   .nav-links {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
   }
   
   .nav-links a {
@@ -102,7 +163,31 @@ const isActive = (linkPath: string) => path === linkPath;
     border-bottom-color: var(--accent);
   }
   
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: flex;
+    }
+    
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background: white;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 6rem 2rem 2rem;
+      gap: 1.5rem;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 10px rgba(var(--black), 10%);
+      z-index: 100;
+    }
+    
+    .nav-links-open {
+      right: 0;
+    }
+    
     .nav-content {
       padding: 1rem;
     }
@@ -111,19 +196,21 @@ const isActive = (linkPath: string) => path === linkPath;
       font-size: 1.1rem;
     }
     
-    .nav-links {
-      gap: 1rem;
-    }
-    
     .nav-links a {
-      font-size: 0.9rem;
-      padding: 0.25rem 0;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      width: 100%;
+      text-align: left;
     }
   }
   
   @media (max-width: 480px) {
     .nav-links {
-      gap: 0.75rem;
+      width: 85%;
+    }
+    
+    .nav-content {
+      padding: 0.75rem;
     }
   }
 </style>
