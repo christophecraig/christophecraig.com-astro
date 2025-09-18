@@ -1,0 +1,140 @@
+---
+interface Props {
+  t: any;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>{t.greeting}</h1>
+    <p class="tagline">{t.tagline}</p>
+    <div class="hero-meta">
+      <span class="nationality">{t.nationality}</span>
+      <span class="age">{t.age}</span>
+    </div>
+  </div>
+  
+  <div class="hero-image">
+    <div class="placeholder-avatar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, rgba(var(--accent), 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .hero-content {
+    margin-bottom: 2rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-dark);
+  }
+  
+  .tagline {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: rgb(var(--gray-dark));
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .nationality, .age {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(var(--gray), 15%);
+    font-weight: 500;
+  }
+  
+  .hero-image {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .placeholder-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  @media (min-width: 768px) {
+    .hero {
+      flex-direction: row;
+      text-align: left;
+      padding: 3rem;
+      gap: 2rem;
+    }
+    
+    .hero-content {
+      flex: 1;
+      margin-bottom: 0;
+      text-align: left;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+    }
+    
+    .hero-meta {
+      justify-content: flex-start;
+    }
+    
+    .hero-image {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  
+  @media (max-width: 720px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .tagline {
+      font-size: 1.1rem;
+    }
+    
+    .hero-meta {
+      gap: 1rem;
+    }
+    
+    .nationality, .age {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>

@@ -1,10 +1,59 @@
-# Astro Starter Kit: Blog
+# Christophe Craig - Personal Website
 
-```sh
-pnpm create astro@latest -- --template blog
+This is the personal website of Christophe Craig, a 28-year-old New Zealander/French full stack web developer passionate about solving problems and building the right tools to enhance everyday life.
+
+## Features
+
+- **Bilingual**: Available in both French and English with automatic language detection
+- **Mobile-first design**: Fully responsive layout that looks great on all devices
+- **Project showcase**: Display of key development projects
+- **Professional portfolio**: Clean, elegant design focused on developer skills and experience
+
+## Projects Featured
+
+1. **Apprentisagris** - A content management platform built on WordPress for agricultural apprentices
+2. **Crypto Prices Tracker** - A React application consuming the CoinGecko API to display cryptocurrency prices
+3. **Strapi/Next.js Web App** - A web application using Strapi for content management and Next.js for frontend display
+
+## Technology Stack
+
+- [Astro](https://astro.build/) - Static site generator
+- CSS with mobile-first responsive design
+- Custom internationalization (i18n) implementation
+- TypeScript for type safety
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deployment
+
+This project is configured for deployment to Netlify. See `SPOTIFY_SETUP.md` for detailed deployment instructions.
+
+## Netlify Deployment
+
+This project is configured for deployment to Netlify. To deploy:
+
+1. Push your code to a GitHub repository
+2. Connect your repository to Netlify
+3. Configure the following environment variables in Netlify:
+   - `SPOTIFY_CLIENT_ID` - Your Spotify application client ID
+   - `SPOTIFY_CLIENT_SECRET` - Your Spotify application client secret
+   - `SPOTIFY_ACCESS_TOKEN` - User access token (obtained through the auth flow)
+   - `SPOTIFY_REFRESH_TOKEN` - User refresh token (obtained through the auth flow)
+   - `SPOTIFY_TOKEN_EXPIRES` - Token expiration timestamp
+
+4. Update your Spotify app settings to include your Netlify domain in the redirect URIs:
+   - `https://your-site-name.netlify.app/api/auth/spotify/callback`
 
 Features:
 

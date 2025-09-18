@@ -1,0 +1,79 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  url?: string;
+  technologies: string[];
+}
+
+interface Props {
+  t: any;
+  projects: Project[];
+}
+
+const { t, projects } = Astro.props;
+---
+
+<section class="projects-section">
+  <div class="section-header">
+    <h2>{t.projectsTitle}</h2>
+  </div>
+  
+  <div class="projects-grid">
+    {projects.map((project) => (
+      <ProjectCard {project} {t} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    margin-bottom: 3rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+    color: var(--accent-dark);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+  }
+  
+  .section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent);
+    border-radius: 3px;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  @media (max-width: 720px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .section-header h2 {
+      font-size: 1.75rem;
+    }
+  }
+</style>

@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare-netlify": "scripts/prepare-netlify-deploy.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.5",

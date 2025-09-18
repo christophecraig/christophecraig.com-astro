@@ -27,6 +27,21 @@ To display your personal listening data, you'll need to authenticate with Spotif
 
 That's it! The refresh token will be automatically saved and used to refresh your access token whenever it expires.
 
+## Deploying to Netlify
+
+When deploying to Netlify, you'll need to set the following environment variables in your Netlify project settings:
+
+- `SPOTIFY_CLIENT_ID` - Your Spotify application client ID
+- `SPOTIFY_CLIENT_SECRET` - Your Spotify application client secret
+- `SPOTIFY_ACCESS_TOKEN` - User access token (obtained through the auth flow)
+- `SPOTIFY_REFRESH_TOKEN` - User refresh token (obtained through the auth flow)
+- `SPOTIFY_TOKEN_EXPIRES` - Token expiration timestamp (Unix timestamp in milliseconds)
+
+After authenticating locally, you'll need to copy the values from your `spotify-tokens.json` file to the corresponding environment variables in Netlify.
+
+Also, make sure to add your Netlify deployment URL to your Spotify app's redirect URIs:
+- `https://your-site-name.netlify.app/api/auth/spotify/callback`
+
 ## How It Works
 
 The integration uses the Spotify Web API TypeScript SDK to fetch your personal data:

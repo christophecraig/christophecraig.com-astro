@@ -1,0 +1,158 @@
+---
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  url?: string;
+  technologies: string[];
+}
+
+interface Props {
+  project: Project;
+  t: any;
+}
+
+const { project, t } = Astro.props;
+---
+
+<div class="project-card">
+  <div class="project-image">
+    {project.imageUrl ? (
+      <img src={project.imageUrl} alt={project.title} loading="lazy" />
+    ) : (
+      <div class="placeholder-image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <path d="M21 15l-5-5L5 21"></path>
+        </svg>
+      </div>
+    )}
+  </div>
+  
+  <div class="project-content">
+    <h3>{project.title}</h3>
+    <p class="project-description">{project.description}</p>
+    
+    <div class="project-tech">
+      {project.technologies.map((tech) => (
+        <span class="tech-tag">{tech}</span>
+      ))}
+    </div>
+    
+    <div class="project-actions">
+      {project.url && (
+        <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-link">
+          {t.viewProject} →
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(var(--gray), 25%), 0 12px 32px rgba(var(--gray), 33%);
+  }
+  
+  .project-image {
+    height: 200px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+  }
+  
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .placeholder-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #e9ecef;
+    color: #6c757d;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+  }
+  
+  .project-description {
+    margin-bottom: 1.25rem;
+    color: rgb(var(--gray-dark));
+    flex-grow: 1;
+  }
+  
+  .project-tech {
+    margin-bottom: 1.25rem;
+  }
+  
+  .tech-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(var(--accent), 0.1);
+    color: var(--accent);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-actions {
+    margin-top: auto;
+  }
+  
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  
+  .project-link:hover {
+    color: var(--accent-dark);
+  }
+  
+  @media (max-width: 720px) {
+    .project-image {
+      height: 160px;
+    }
+    
+    .project-content {
+      padding: 1rem;
+    }
+    
+    .project-content h3 {
+      font-size: 1.125rem;
+    }
+  }
+</style>

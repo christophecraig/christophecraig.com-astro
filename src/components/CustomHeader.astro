@@ -1,0 +1,120 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  currentLang: 'en' | 'fr';
+  path: string;
+  t: any;
+}
+
+const { currentLang, path, t } = Astro.props;
+---
+
+<header>
+  <nav>
+    <div class="nav-content">
+      <h2><a href={currentLang === 'en' ? '/?lang=en' : '/?lang=fr'}>Christophe Craig</a></h2>
+      
+      <div class="nav-links">
+        <a 
+          href={currentLang === 'en' ? '/?lang=en' : '/?lang=fr'} 
+          class={path === '/' ? 'active' : ''}
+        >
+          {t.home}
+        </a>
+        <a 
+          href={currentLang === 'en' ? '/about?lang=en' : '/about?lang=fr'} 
+          class={path === '/about' ? 'active' : ''}
+        >
+          {t.about}
+        </a>
+        <a 
+          href={currentLang === 'en' ? '/projects?lang=en' : '/projects?lang=fr'} 
+          class={path === '/projects' ? 'active' : ''}
+        >
+          {t.projects}
+        </a>
+      </div>
+      
+      <LanguageSwitcher {currentLang} {path} />
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    margin: 0;
+    padding: 0;
+    background: white;
+    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  h2 a,
+  h2 a.active {
+    text-decoration: none;
+    color: var(--accent-dark);
+    font-weight: 700;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    padding: 0.5rem 0;
+    color: rgb(var(--gray-dark));
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  
+  @media (max-width: 720px) {
+    .nav-content {
+      padding: 1rem;
+    }
+    
+    h2 {
+      font-size: 1.1rem;
+    }
+    
+    .nav-links {
+      gap: 1rem;
+    }
+    
+    .nav-links a {
+      font-size: 0.9rem;
+      padding: 0.25rem 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .nav-links {
+      gap: 0.75rem;
+    }
+  }
+</style>

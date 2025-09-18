@@ -1,0 +1,53 @@
+---
+interface Props {
+  currentLang: 'en' | 'fr';
+  path: string;
+}
+
+const { currentLang, path } = Astro.props;
+
+const otherLang = currentLang === 'en' ? 'fr' : 'en';
+const otherLangLabel = currentLang === 'en' ? 'Français' : 'English';
+
+// Remove any existing lang parameter and add the new one
+const url = new URL(Astro.request.url);
+url.searchParams.set('lang', otherLang);
+const switchUrl = url.pathname + url.search;
+---
+
+<div class="language-switcher">
+  <a href={switchUrl} class="language-link" aria-label={`Switch to ${otherLangLabel}`}>
+    {otherLang === 'en' ? 'EN' : 'FR'}
+  </a>
+</div>
+
+<style>
+  .language-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .language-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+  
+  .language-link:hover {
+    background-color: var(--accent);
+    color: white;
+  }
+  
+  @media (max-width: 720px) {
+    .language-link {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
