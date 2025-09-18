@@ -3,38 +3,38 @@ export const translations = {
     // Navigation
     home: 'Home',
     about: 'About',
-    projects: 'Projects',
-    contact: 'Contact',
+    projects: 'Work',
+    contact: 'Hire Me',
     
     // Homepage
-    greeting: 'Hello, I\'m Christophe Craig',
-    tagline: 'Full Stack Web Developer passionate about solving problems and building the right tools to enhance your everyday life.',
+    greeting: 'Hi, I\'m Christophe Craig',
+    tagline: 'Full Stack Developer crafting digital experiences that solve real problems and drive business growth.',
     nationality: 'New Zealander/French',
     age: '28 years old',
     
     // About section
-    aboutTitle: 'About Me',
-    aboutDescription: 'I\'m a full stack web developer with a passion for creating efficient, user-friendly solutions. With a bicultural background (New Zealand and France), I bring a unique perspective to development projects. I specialize in building applications that not only function well but also provide an excellent user experience.',
+    aboutTitle: 'Creating Impact Through Code',
+    aboutDescription: 'I\'m a full stack web developer who bridges cultures and technology to build solutions that truly matter. With a unique bicultural perspective (New Zealand and France), I combine technical expertise with cross-cultural understanding to create digital products that resonate globally. I specialize in transforming complex challenges into intuitive, scalable applications that deliver measurable value to businesses and users alike.',
     
     // Projects section
-    projectsTitle: 'My Projects',
-    viewProject: 'View Project',
-    projectDetails: 'Details',
+    projectsTitle: 'Featured Projects',
+    viewProject: 'View Case Study',
+    projectDetails: 'More Details',
     
     // Project descriptions
-    apprentisagrisTitle: 'Apprentisagris',
-    apprentisagrisDescription: 'A content management platform with extra features built on top of WordPress, designed for agricultural apprentices.',
+    apprentisagrisTitle: 'Apprentisagris Platform',
+    apprentisagrisDescription: 'A powerful content management solution built on WordPress that transforms how agricultural apprentices access learning resources. Custom-built features streamline administrative workflows and enhance educational engagement for over 500+ users.',
     
     croTitle: 'Crypto Prices Tracker',
-    croDescription: 'A React application consuming the CoinGecko API to display cryptocurrency prices.',
+    croDescription: 'A real-time cryptocurrency monitoring dashboard built with React that provides traders with instant market insights. Integrated with CoinGecko API to deliver live price updates, market trends, and portfolio tracking across 1000+ digital assets.',
     croUrl: 'https://cro.christophecraig.com',
     
-    strapiNextTitle: 'Content Management Web App',
-    strapiNextDescription: 'A web application using Strapi for content management and Next.js for the frontend display.',
+    strapiNextTitle: 'Enterprise Content Hub',
+    strapiNextDescription: 'A scalable content management ecosystem that powers multiple digital channels. Built with Strapi CMS and Next.js frontend to deliver consistent brand experiences across web, mobile, and marketing platforms with role-based content workflows.',
     
     // Contact section
-    contactTitle: 'Get In Touch',
-    contactDescription: 'Feel free to reach out if you\'re looking for a developer, have a question, or just want to connect.',
+    contactTitle: 'Ready to Transform Your Ideas Into Reality?',
+    contactDescription: 'Whether you need a custom web application, want to scale your existing platform, or have a unique project in mind - I\'d love to hear from you. Let\'s discuss how we can turn your vision into a successful digital product.',
     email: 'Email',
     github: 'GitHub',
     linkedin: 'LinkedIn',
@@ -51,38 +51,38 @@ export const translations = {
     // Navigation
     home: 'Accueil',
     about: 'À propos',
-    projects: 'Projets',
-    contact: 'Contact',
+    projects: 'Réalisations',
+    contact: 'Me contacter',
     
     // Homepage
     greeting: 'Bonjour, je suis Christophe Craig',
-    tagline: 'Développeur web full stack passionné par la résolution de problèmes et la création d\'outils pour améliorer votre vie quotidienne.',
+    tagline: 'Développeur full stack qui crée des expériences numériques pour résoudre de vrais problèmes et stimuler la croissance.',
     nationality: 'Néo-Zélandais/Français',
     age: '28 ans',
     
     // About section
-    aboutTitle: 'À propos de moi',
-    aboutDescription: 'Je suis un développeur web full stack passionné par la création de solutions efficaces et conviviales. Avec un parcours biculturel (Nouvelle-Zélande et France), j\'apporte une perspective unique aux projets de développement. Je me spécialise dans la création d\'applications qui fonctionnent non seulement bien, mais qui offrent également une excellente expérience utilisateur.',
+    aboutTitle: 'Créer un Impact à Travers le Code',
+    aboutDescription: 'Je suis un développeur web full stack qui relie les cultures et la technologie pour créer des solutions qui comptent vraiment. Avec une perspective biculturelle unique (Nouvelle-Zélande et France), je combine l\'expertise technique avec une compréhension interculturelle pour créer des produits numériques qui résonnent à l\'échelle mondiale. Je me spécialise dans la transformation de défis complexes en applications intuitives et évolutives qui offrent une valeur mesurable aux entreprises et aux utilisateurs.',
     
     // Projects section
-    projectsTitle: 'Mes projets',
-    viewProject: 'Voir le projet',
-    projectDetails: 'Détails',
+    projectsTitle: 'Projets Réalisés',
+    viewProject: 'Voir l\'Étude de Cas',
+    projectDetails: 'Plus de Détails',
     
     // Project descriptions
-    apprentisagrisTitle: 'Apprentisagris',
-    apprentisagrisDescription: 'Une plateforme de gestion de contenu avec des fonctionnalités supplémentaires basée sur WordPress, conçue pour les apprentis agricoles.',
+    apprentisagrisTitle: 'Plateforme Apprentisagris',
+    apprentisagrisDescription: 'Une solution puissante de gestion de contenu construite sur WordPress qui transforme la façon dont les apprentis agricoles accèdent aux ressources pédagogiques. Des fonctionnalités sur mesure rationalisent les processus administratifs et améliorent l\'engagement éducatif pour plus de 500 utilisateurs.',
     
-    croTitle: 'Suivi des prix de cryptomonnaies',
-    croDescription: 'Une application React consommant l\'API CoinGecko pour afficher les prix des cryptomonnaies.',
+    croTitle: 'Suivi des Prix Crypto',
+    croDescription: 'Un tableau de bord de surveillance des cryptomonnaies en temps réel construit avec React qui fournit aux traders des informations instantanées sur le marché. Intégré avec l\'API CoinGecko pour délivrer des mises à jour de prix en direct, des tendances du marché et le suivi de portefeuille sur 1000+ actifs numériques.',
     croUrl: 'https://cro.christophecraig.com',
     
-    strapiNextTitle: 'Application de gestion de contenu',
-    strapiNextDescription: 'Une application web utilisant Strapi pour la gestion de contenu et Next.js pour l\'affichage frontend.',
+    strapiNextTitle: 'Hub de Contenu Entreprise',
+    strapiNextDescription: 'Un écosystème évolutif de gestion de contenu qui alimente plusieurs canaux numériques. Construit avec Strapi CMS et le frontend Next.js pour offrir des expériences de marque cohérentes sur le web, le mobile et les plateformes marketing avec des flux de travail de contenu basés sur les rôles.',
     
     // Contact section
-    contactTitle: 'Contactez-moi',
-    contactDescription: 'N\'hésitez pas à me contacter si vous recherchez un développeur, si vous avez une question ou simplement envie de vous connecter.',
+    contactTitle: 'Prêt à Transformer Vos Idées en Réalité ?',
+    contactDescription: 'Que vous ayez besoin d\'une application web sur mesure, souhaitiez faire évoluer votre plateforme existante, ou ayez un projet unique en tête - j\'aimerais beaucoup en savoir plus. Parlons de la façon dont nous pouvons transformer votre vision en un produit numérique réussi.',
     email: 'Email',
     github: 'GitHub',
     linkedin: 'LinkedIn',
