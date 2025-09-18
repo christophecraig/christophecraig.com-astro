@@ -35,6 +35,8 @@ export class TokenStorage {
     // For Netlify deployment, tokens would be set as environment variables
     // This is handled externally through the Netlify dashboard
     console.log('For Netlify deployment, set these environment variables:');
+    console.log(`  ${SPOTIFY_ACCESS_TOKEN_ENV}=${tokens.access_token}`);
+    console.log(`  ${SPOTIFY_REFRESH_TOKEN_ENV}=${tokens.refresh_token}`);
     console.log(`  ${SPOTIFY_TOKEN_EXPIRES_ENV}=${tokens.expires_at}`);
   }
 
