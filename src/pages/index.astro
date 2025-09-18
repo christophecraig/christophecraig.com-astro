@@ -1,5 +1,5 @@
 ---
-import { getTranslations, detectLanguageFromPath } from '../i18n/utils';
+import { getTranslations, detectLanguage } from '../i18n/utils';
 import CustomHeader from '../components/CustomHeader.astro';
 import CustomFooter from '../components/CustomFooter.astro';
 import Hero from '../components/Hero.astro';
@@ -7,8 +7,8 @@ import AboutSection from '../components/AboutSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 
-// Detect language from path
-const lang = 'fr';
+// Detect language from request
+const lang = detectLanguage(Astro.request);
 const t = getTranslations(lang);
 
 // Define projects data

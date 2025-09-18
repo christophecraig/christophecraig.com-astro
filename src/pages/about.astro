@@ -1,12 +1,12 @@
 ---
-import { getTranslations, detectLanguageFromPath } from '../i18n/utils';
+import { getTranslations, detectLanguage } from '../i18n/utils';
 import CustomHeader from '../components/CustomHeader.astro';
 import CustomFooter from '../components/CustomFooter.astro';
 import SpotifyTracks from '../components/SpotifyTracks.astro';
 import { SpotifyService } from '../services/spotify';
 
-// Detect language from path
-const lang = 'fr';
+// Detect language from request
+const lang = detectLanguage(Astro.request);
 const t = getTranslations(lang);
 
 // Initialize Spotify service

@@ -7,23 +7,13 @@ export function getTranslations(lang: Language) {
 }
 
 export function detectLanguageFromPath(pathname: string): Language {
-  // Check if the path starts with /en/
-  if (pathname.startsWith('/en/')) {
-    return 'en';
-  }
-  // Default to French for all other paths
-  return 'fr';
+  // No longer detect language from path since we're removing language folders
+  return 'fr'; // Default to French
 }
 
 export function detectLanguage(request: Request): Language {
-  // Check URL path first
+  // Check URL parameter first
   const url = new URL(request.url);
-  const langFromPath = detectLanguageFromPath(url.pathname);
-  if (langFromPath === 'en' || langFromPath === 'fr') {
-    return langFromPath;
-  }
-  
-  // Check URL parameter as fallback
   const langParam = url.searchParams.get('lang');
   if (langParam === 'en' || langParam === 'fr') {
     return langParam;
@@ -44,16 +34,25 @@ export function detectLanguage(request: Request): Language {
     }
   }
   
+  // Check cookie
+  const cookieHeader = request.headers.get('Cookie');
+  if (cookieHeader) {
+    const cookies = cookieHeader.split(';').map(cookie => cookie.trim());
+    for (const cookie of cookies) {
+      if (cookie.startsWith('lang=')) {
+        const lang = cookie.split('=')[1];
+        if (lang === 'en' || lang === 'fr') {
+          return lang;
+        }
+      }
+    }
+  }
+  
   // Default to French
   return 'fr';
 }
 
 export function getLocalizedPath(path: string, lang: Language): string {
-  // If it's the home page
-  if (path === '/') {
-    return lang === 'en' ? '/en/' : '/';
-  }
-  
-  // For other paths, add /en prefix for English
-  return lang === 'en' ? `/en${path}` : path;
+  // No longer add language prefix since we're removing language folders
+  return path;
 }
