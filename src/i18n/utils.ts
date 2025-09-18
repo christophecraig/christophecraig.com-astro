@@ -77,11 +77,11 @@ export function getLocalizedPath(path: string, lang: Language): string {
   
   // If it's the home page
   if (cleanPath === '/') {
-    return lang === 'en' ? '/en/' : '/';
+    return lang === 'en' ? '/en/' : '/fr/';
   }
   
-  // For other paths, add language prefix for English
-  return lang === 'en' ? `/en${cleanPath}` : cleanPath;
+  // For other paths, add language prefix
+  return lang === 'en' ? `/en${cleanPath}` : `/fr${cleanPath}`;
 }
 
 export function isValidLanguage(lang: string): lang is Language {

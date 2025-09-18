@@ -28,7 +28,7 @@ const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
-    <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/about` : '/about'} {t} />
+    <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/about` : '/fr/about'} {t} />
     
     <main>
       <section class="about-page">

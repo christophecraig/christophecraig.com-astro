@@ -14,6 +14,9 @@ const { currentLang, path, t } = Astro.props;
 const homePath = getLocalizedPath('/', currentLang);
 const aboutPath = getLocalizedPath('/about', currentLang);
 const projectsPath = getLocalizedPath('/projects', currentLang);
+
+// Helper function to check if a path is active
+const isActive = (linkPath: string) => path === linkPath;
 ---
 
 <header>
@@ -24,19 +27,19 @@ const projectsPath = getLocalizedPath('/projects', currentLang);
       <div class="nav-links">
         <a 
           href={homePath} 
-          class={path === '/' ? 'active' : ''}
+          class={isActive(homePath) ? 'active' : ''}
         >
           {t.home}
         </a>
         <a 
           href={aboutPath} 
-          class={path === '/about' ? 'active' : ''}
+          class={isActive(aboutPath) ? 'active' : ''}
         >
           {t.about}
         </a>
         <a 
           href={projectsPath} 
-          class={path === '/projects' ? 'active' : ''}
+          class={isActive(projectsPath) ? 'active' : ''}
         >
           {t.projects}
         </a>
