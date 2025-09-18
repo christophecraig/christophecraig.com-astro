@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLocalizedPath } from '../i18n/utils';
 
 interface Props {
   currentLang: 'en' | 'fr';
@@ -9,10 +10,10 @@ interface Props {
 
 const { currentLang, path, t } = Astro.props;
 
-// Generate simple paths without language prefixes
-const homePath = '/';
-const aboutPath = '/about';
-const projectsPath = '/projects';
+// Generate localized paths for navigation
+const homePath = getLocalizedPath('/', currentLang);
+const aboutPath = getLocalizedPath('/about', currentLang);
+const projectsPath = getLocalizedPath('/projects', currentLang);
 ---
 
 <header>

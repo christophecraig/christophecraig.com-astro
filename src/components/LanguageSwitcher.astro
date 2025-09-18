@@ -1,4 +1,6 @@
 ---
+import { getLocalizedPath } from '../i18n/utils';
+
 interface Props {
   currentLang: 'en' | 'fr';
   path: string;
@@ -9,8 +11,8 @@ const { currentLang, path } = Astro.props;
 const otherLang = currentLang === 'en' ? 'fr' : 'en';
 const otherLangLabel = currentLang === 'en' ? 'Français' : 'English';
 
-// Generate the URL with language parameter for the other language
-const switchUrl = `${path}?lang=${otherLang}`;
+// Generate the localized path for the other language
+const switchUrl = getLocalizedPath(path, otherLang);
 ---
 
 <div class="language-switcher">

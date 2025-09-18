@@ -1,12 +1,12 @@
 ---
-import { getTranslations, detectLanguage } from '../i18n/utils';
-import CustomHeader from '../components/CustomHeader.astro';
-import CustomFooter from '../components/CustomFooter.astro';
-import SpotifyTracks from '../components/SpotifyTracks.astro';
-import { SpotifyService } from '../services/spotify';
+import { getTranslations, isValidLanguage } from '../../i18n/utils';
+import CustomHeader from '../../components/CustomHeader.astro';
+import CustomFooter from '../../components/CustomFooter.astro';
+import SpotifyTracks from '../../components/SpotifyTracks.astro';
+import { SpotifyService } from '../../services/spotify';
 
-// Detect language from request
-const lang = detectLanguage(Astro.request);
+// Get language from path parameter
+const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
 const t = getTranslations(lang);
 
 // Initialize Spotify service
@@ -28,7 +28,7 @@ const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
-    <CustomHeader currentLang={lang} path="/about" {t} />
+    <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/about` : '/about'} {t} />
     
     <main>
       <section class="about-page">

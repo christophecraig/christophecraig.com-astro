@@ -1,11 +1,11 @@
 ---
-import { getTranslations, detectLanguage } from '../i18n/utils';
-import CustomHeader from '../components/CustomHeader.astro';
-import CustomFooter from '../components/CustomFooter.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import { getTranslations, isValidLanguage } from '../../i18n/utils';
+import CustomHeader from '../../components/CustomHeader.astro';
+import CustomFooter from '../../components/CustomFooter.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
 
-// Detect language from request
-const lang = detectLanguage(Astro.request);
+// Get language from path parameter
+const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
 const t = getTranslations(lang);
 
 // Define projects data
@@ -44,7 +44,7 @@ const projects = [
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
-    <CustomHeader currentLang={lang} path="/projects" {t} />
+    <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/projects` : '/projects'} {t} />
     
     <main>
       <section class="projects-page">

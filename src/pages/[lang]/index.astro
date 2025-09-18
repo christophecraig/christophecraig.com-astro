@@ -1,0 +1,61 @@
+---
+import { getTranslations, isValidLanguage } from '../../i18n/utils';
+import CustomHeader from '../../components/CustomHeader.astro';
+import CustomFooter from '../../components/CustomFooter.astro';
+import Hero from '../../components/Hero.astro';
+import AboutSection from '../../components/AboutSection.astro';
+import ProjectsSection from '../../components/ProjectsSection.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+// Get language from path parameter
+const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
+const t = getTranslations(lang);
+
+// Define projects data
+const projects = [
+  {
+    id: 'apprentisagris',
+    title: t.apprentisagrisTitle,
+    description: t.apprentisagrisDescription,
+    technologies: ['WordPress', 'PHP', 'JavaScript'],
+  },
+  {
+    id: 'cro',
+    title: t.croTitle,
+    description: t.croDescription,
+    url: t.croUrl,
+    technologies: ['React', 'JavaScript', 'API'],
+    imageUrl: '/images/cro-preview.jpg' // We'll add this later
+  },
+  {
+    id: 'strapi-next',
+    title: t.strapiNextTitle,
+    description: t.strapiNextDescription,
+    technologies: ['Strapi', 'Next.js', 'React'],
+  }
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{t.greeting} - Christophe Craig</title>
+    <meta name="description" content={t.tagline} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+    <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/` : '/'} {t} />
+    
+    <main>
+      <Hero {t} />
+      <AboutSection {t} />
+      <ProjectsSection {t} {projects} />
+      <ContactSection {t} />
+    </main>
+    
+    <CustomFooter {t} currentLang={lang} />
+  </body>
+</html>
