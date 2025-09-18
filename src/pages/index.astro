@@ -1,12 +1,61 @@
-<!DOCTYPE html>
-<html>
+---
+import { getTranslations } from '../i18n/utils';
+import CustomHeader from '../components/CustomHeader.astro';
+import CustomFooter from '../components/CustomFooter.astro';
+import Hero from '../components/Hero.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import '../styles/global.css';
+
+// Set language to French (default)
+const lang = 'fr';
+const t = getTranslations(lang);
+
+// Define projects data
+const projects = [
+  {
+    id: 'apprentisagris',
+    title: t.apprentisagrisTitle,
+    description: t.apprentisagrisDescription,
+    technologies: ['WordPress', 'PHP', 'JavaScript'],
+  },
+  {
+    id: 'cro',
+    title: t.croTitle,
+    description: t.croDescription,
+    url: t.croUrl,
+    technologies: ['React', 'JavaScript', 'API'],
+    imageUrl: '/images/cro-preview.jpg' // We'll add this later
+  },
+  {
+    id: 'strapi-next',
+    title: t.strapiNextTitle,
+    description: t.strapiNextDescription,
+    technologies: ['Strapi', 'Next.js', 'React'],
+  }
+];
+---
+
+<!doctype html>
+<html lang={lang}>
   <head>
-    <meta charset="utf-8" />
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0; URL=/fr/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{t.greeting} - Christophe Craig</title>
+    <meta name="description" content={t.tagline} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <p>Redirecting to the French version of the site...</p>
-    <a href="/fr/">Click here if you are not redirected</a>
+    <CustomHeader currentLang={lang} path="/" {t} />
+    
+    <main>
+      <Hero {t} />
+      <AboutSection {t} />
+      <ProjectsSection {t} {projects} />
+      <ContactSection {t} />
+    </main>
+    
+    <CustomFooter {t} currentLang={lang} />
   </body>
 </html>
