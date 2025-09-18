@@ -21,7 +21,7 @@ const { project, t } = Astro.props;
     {project.imageUrl ? (
       <img src={project.imageUrl} alt={project.title} loading="lazy" />
     ) : (
-      <div class="placeholder-image">
+      <div class="image-placeholder">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
           <circle cx="8.5" cy="8.5" r="1.5"></circle>
@@ -32,7 +32,7 @@ const { project, t } = Astro.props;
   </div>
   
   <div class="project-content">
-    <h3>{project.title}</h3>
+    <h3 class="project-title">{project.title}</h3>
     <p class="project-description">{project.description}</p>
     
     <div class="project-tech">
@@ -55,74 +55,81 @@ const { project, t } = Astro.props;
   .project-card {
     display: flex;
     flex-direction: column;
-    background: white;
-    border-radius: 12px;
+    background: var(--surface);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--box-shadow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
     height: 100%;
   }
   
   .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(var(--gray), 25%), 0 12px 32px rgba(var(--gray), 33%);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
   }
   
   .project-image {
-    height: 200px;
+    height: 220px;
     overflow: hidden;
-    background-color: #f8f9fa;
+    background-color: rgba(122, 158, 175, 0.05);
   }
   
   .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 12px 12px 0 0;
+    transition: transform 0.3s ease;
   }
   
-  .placeholder-image {
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+  
+  .image-placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: #e9ecef;
-    color: #6c757d;
+    background-color: rgba(122, 158, 175, 0.1);
+    color: var(--primary);
   }
   
   .project-content {
-    padding: 1.5rem;
+    padding: var(--space-xl);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
   }
   
-  .project-content h3 {
+  .project-title {
     margin-top: 0;
-    margin-bottom: 0.75rem;
-    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+    font-size: 1.5rem;
+    color: var(--primary-dark);
   }
   
   .project-description {
-    margin-bottom: 1.25rem;
-    color: rgb(var(--gray-dark));
+    margin-bottom: var(--space-lg);
+    color: var(--text-secondary);
     flex-grow: 1;
   }
   
   .project-tech {
-    margin-bottom: 1.25rem;
+    margin-bottom: var(--space-lg);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
   }
   
   .tech-tag {
     display: inline-block;
-    padding: 0.25rem 0.5rem;
-    background-color: rgba(var(--accent), 0.1);
-    color: var(--accent);
-    border-radius: 20px;
+    padding: var(--space-xs) var(--space-sm);
+    background-color: rgba(122, 158, 175, 0.1);
+    color: var(--primary);
+    border-radius: var(--radius-full);
     font-size: 0.75rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    font-weight: 500;
   }
   
   .project-actions {
@@ -132,27 +139,46 @@ const { project, t } = Astro.props;
   .project-link {
     display: inline-flex;
     align-items: center;
-    color: var(--accent);
+    color: var(--primary);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.2s ease;
+    gap: var(--space-xs);
   }
   
   .project-link:hover {
-    color: var(--accent-dark);
+    color: var(--primary-dark);
   }
   
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
     .project-image {
-      height: 160px;
+      height: 200px;
     }
     
     .project-content {
-      padding: 1rem;
+      padding: var(--space-lg);
     }
     
-    .project-content h3 {
-      font-size: 1.125rem;
+    .project-title {
+      font-size: 1.25rem;
+    }
+    
+    .project-tech {
+      margin-bottom: var(--space-md);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .project-image {
+      height: 180px;
+    }
+    
+    .project-content {
+      padding: var(--space-md);
+    }
+    
+    .project-description {
+      font-size: 0.95rem;
     }
   }
 </style>

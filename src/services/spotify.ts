@@ -1,5 +1,5 @@
 import { SpotifyApi } from '@spotify/web-api-ts-sdk';
-import { TokenStorage, SpotifyTokens } from './token-storage';
+import { type SpotifyTokens, TokenStorage } from './token-storage';
 
 // A simple cache to avoid repeated API calls during development
 const cache: Record<string, { data: any; timestamp: number }> = {};

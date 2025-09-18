@@ -17,40 +17,46 @@ const projectsPath = getLocalizedPath('/projects', currentLang);
 
 // Helper function to check if a path is active
 const isActive = (linkPath: string) => path === linkPath;
+
+// State for mobile menu
+let isMenuOpen = false;
 ---
 
-<header>
-  <nav>
-    <div class="nav-content">
-      <h2><a href={homePath}>Christophe Craig</a></h2>
+<header class="header">
+  <nav class="nav">
+    <div class="nav-container">
+      <h2 class="logo">
+        <a href={homePath}>Christophe Craig</a>
+      </h2>
       
       <!-- Hamburger menu button for mobile -->
       <button 
         class="mobile-menu-toggle" 
         aria-label="Toggle navigation menu"
-        id="mobile-menu-toggle"
+        aria-expanded={isMenuOpen ? "true" : "false"}
+        onClick={() => isMenuOpen = !isMenuOpen}
       >
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
       </button>
       
-      <div class="nav-links" id="nav-links">
+      <div class={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
         <a 
           href={homePath} 
-          class={isActive(homePath) ? 'active' : ''}
+          class={`nav-link ${isActive(homePath) ? 'active' : ''}`}
         >
           {t.home}
         </a>
         <a 
           href={aboutPath} 
-          class={isActive(aboutPath) ? 'active' : ''}
+          class={`nav-link ${isActive(aboutPath) ? 'active' : ''}`}
         >
           {t.about}
         </a>
         <a 
           href={projectsPath} 
-          class={isActive(projectsPath) ? 'active' : ''}
+          class={`nav-link ${isActive(projectsPath) ? 'active' : ''}`}
         >
           {t.projects}
         </a>
@@ -60,68 +66,48 @@ const isActive = (linkPath: string) => path === linkPath;
   </nav>
 </header>
 
-<script is:client>
-  const toggleButton = document.getElementById('mobile-menu-toggle');
-  const navLinks = document.getElementById('nav-links');
-  
-  if (toggleButton && navLinks) {
-    toggleButton.addEventListener('click', () => {
-      navLinks.classList.toggle('nav-links-open');
-      
-      // Update aria-expanded attribute for accessibility
-      const isExpanded = navLinks.classList.contains('nav-links-open');
-      toggleButton.setAttribute('aria-expanded', isExpanded.toString());
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-      if (!navLinks.contains(event.target) && !toggleButton.contains(event.target)) {
-        navLinks.classList.remove('nav-links-open');
-        toggleButton.setAttribute('aria-expanded', 'false');
-      }
-    });
-    
-    // Close menu when clicking on a link
-    const navLinksItems = navLinks.querySelectorAll('a');
-    navLinksItems.forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('nav-links-open');
-        toggleButton.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-</script>
-
 <style>
-  header {
+  .header {
     margin: 0;
     padding: 0;
-    background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    background: var(--surface);
+    box-shadow: var(--shadow-md);
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
   }
   
-  .nav-content {
+  .nav {
+    width: 100%;
+  }
+  
+  .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
-    max-width: 1200px;
+    padding: var(--space-md) var(--space-lg);
+    max-width: 1800px;
     margin: 0 auto;
+    width: 100%;
   }
   
-  h2 {
+  .logo {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
   
-  h2 a,
-  h2 a.active {
+  .logo a,
+  .logo a.active {
     text-decoration: none;
-    color: var(--accent-dark);
+    color: var(--primary-dark);
     font-weight: 700;
+    font-family: var(--font-heading);
+    transition: color 0.2s ease;
+  }
+  
+  .logo a:hover {
+    color: var(--accent);
   }
   
   .mobile-menu-toggle {
@@ -130,37 +116,40 @@ const isActive = (linkPath: string) => path === linkPath;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.25rem;
+    padding: var(--space-xs);
     z-index: 101;
+    border-radius: var(--radius-sm);
   }
   
   .hamburger-line {
     width: 24px;
     height: 2px;
-    background-color: var(--accent-dark);
+    background-color: var(--primary-dark);
     margin: 3px 0;
     transition: 0.3s;
   }
   
   .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: var(--space-lg);
     align-items: center;
   }
   
-  .nav-links a {
-    padding: 0.5rem 0;
-    color: rgb(var(--gray-dark));
+  .nav-link {
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-secondary);
     border-bottom: 2px solid transparent;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
+    border-radius: var(--radius-sm);
   }
   
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--primary);
+    background-color: rgba(122, 158, 175, 0.1);
+    border-bottom-color: var(--primary);
   }
   
   @media (max-width: 768px) {
@@ -174,13 +163,13 @@ const isActive = (linkPath: string) => path === linkPath;
       right: -100%;
       width: 70%;
       height: 100vh;
-      background: white;
+      background: var(--surface);
       flex-direction: column;
       justify-content: flex-start;
-      padding: 6rem 2rem 2rem;
-      gap: 1.5rem;
+      padding: 8rem 2rem 2rem;
+      gap: var(--space-xl);
       transition: right 0.3s ease;
-      box-shadow: -2px 0 10px rgba(var(--black), 10%);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
       z-index: 100;
     }
     
@@ -188,19 +177,20 @@ const isActive = (linkPath: string) => path === linkPath;
       right: 0;
     }
     
-    .nav-content {
-      padding: 1rem;
+    .nav-container {
+      padding: var(--space-md);
     }
     
-    h2 {
-      font-size: 1.1rem;
+    .logo {
+      font-size: 1.25rem;
     }
     
-    .nav-links a {
-      font-size: 1.1rem;
-      padding: 0.5rem 0;
+    .nav-link {
+      font-size: 1.25rem;
+      padding: var(--space-md);
       width: 100%;
       text-align: left;
+      border-bottom: 2px solid transparent;
     }
   }
   
@@ -209,8 +199,8 @@ const isActive = (linkPath: string) => path === linkPath;
       width: 85%;
     }
     
-    .nav-content {
-      padding: 0.75rem;
+    .nav-container {
+      padding: var(--space-sm);
     }
   }
 </style>

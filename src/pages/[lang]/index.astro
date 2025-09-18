@@ -20,7 +20,7 @@ const projects = [
     title: t.apprentisagrisTitle,
     description: t.apprentisagrisDescription,
     technologies: ['WordPress', 'PHP', 'JavaScript'],
-    imageUrl: ApprentisAgrisImage.src
+    imageUrl: ApprentisAgrisImage
   },
   {
     id: 'cro',
@@ -28,7 +28,7 @@ const projects = [
     description: t.croDescription,
     url: t.croUrl,
     technologies: ['React', 'JavaScript', 'API'],
-    imageUrl: '/images/cro-preview.jpg' // We'll add this later
+    imageUrl: '/images/cro-preview.jpg'
   },
   {
     id: 'strapi-next',
@@ -50,7 +50,8 @@ const projects = [
   </head>
   <body>
     <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/` : '/fr/'} {t} />
-    <main>
+    
+    <main class="main-homepage">
       <Hero {t} />
       <AboutSection {t} />
       <ProjectsSection {t} {projects} />
@@ -60,3 +61,66 @@ const projects = [
     <CustomFooter {t} currentLang={lang} />
   </body>
 </html>
+
+<style>
+  .main-homepage {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+  
+  /* Ensure full-width sections */
+  .hero, .about-section, .projects-section, .contact-section {
+    width: 100%;
+    max-width: none;
+  }
+  
+  /* Remove default container padding for full-width layout */
+  .hero .container,
+  .about-section .section-container,
+  .projects-section .section-container,
+  .contact-section .section-container {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+  }
+  
+  /* Add back padding for content within sections */
+  .hero-content,
+  .about-content,
+  .projects-grid,
+  .contact-content {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
+  
+  @media (min-width: 768px) {
+    .hero-content,
+    .about-content,
+    .projects-grid,
+    .contact-content {
+      padding-left: var(--space-2xl);
+      padding-right: var(--space-2xl);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .hero-content,
+    .about-content,
+    .projects-grid,
+    .contact-content {
+      padding-left: var(--space-3xl);
+      padding-right: var(--space-3xl);
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .hero-content,
+    .about-content,
+    .projects-grid,
+    .contact-content {
+      padding-left: var(--space-4xl);
+      padding-right: var(--space-4xl);
+    }
+  }
+</style>
