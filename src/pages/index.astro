@@ -6,6 +6,7 @@ import Hero from '../components/Hero.astro';
 import AboutSection from '../components/AboutSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
 import ContactSection from '../components/ContactSection.astro';
+import ApprentisAgrisImage from '../assets/logo-apprentis-agris.svg';
 import '../styles/global.css';
 
 // Set language to French (default)
@@ -19,6 +20,7 @@ const projects = [
     title: t.apprentisagrisTitle,
     description: t.apprentisagrisDescription,
     technologies: ['WordPress', 'PHP', 'JavaScript'],
+    imageUrl: ApprentisAgrisImage.src,
   },
   {
     id: 'cro',
