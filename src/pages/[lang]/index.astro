@@ -6,11 +6,14 @@ import Hero from '../../components/Hero.astro';
 import AboutSection from '../../components/AboutSection.astro';
 import ProjectsSection from '../../components/ProjectsSection.astro';
 import ContactSection from '../../components/ContactSection.astro';
+import ApprentisAgrisImage from '../../assets/apprentis-agris-square.webp';
 import '../../styles/global.css';
 
 // Get language from path parameter
 const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
 const t = getTranslations(lang);
+
+console.log({ ApprentisAgrisImage })
 
 // Define projects data
 const projects = [
@@ -19,6 +22,7 @@ const projects = [
     title: t.apprentisagrisTitle,
     description: t.apprentisagrisDescription,
     technologies: ['WordPress', 'PHP', 'JavaScript'],
+    imageUrl: ApprentisAgrisImage
   },
   {
     id: 'cro',
@@ -48,8 +52,9 @@ const projects = [
   </head>
   <body>
     <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/` : '/fr/'} {t} />
-    
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeee
     <main>
+      eeeeeeeeeeeeeeee
       <Hero {t} />
       <AboutSection {t} />
       <ProjectsSection {t} {projects} />

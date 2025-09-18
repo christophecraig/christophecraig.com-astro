@@ -8,6 +8,16 @@
   targetPort = 4321
 
 [[redirects]]
+  from = "/api/auth/spotify"
+  to = "/.netlify/functions/spotify-auth"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/spotify/callback"
+  to = "/.netlify/functions/spotify-callback"
+  status = 200
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
