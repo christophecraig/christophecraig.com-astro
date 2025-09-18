@@ -6,6 +6,7 @@ import Hero from '../../components/Hero.astro';
 import AboutSection from '../../components/AboutSection.astro';
 import ProjectsSection from '../../components/ProjectsSection.astro';
 import ContactSection from '../../components/ContactSection.astro';
+import '../../styles/global.css';
 
 // Get language from path parameter
 const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
@@ -44,7 +45,6 @@ const projects = [
     <title>{t.greeting} - Christophe Craig</title>
     <meta name="description" content={t.tagline} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/` : '/fr/'} {t} />

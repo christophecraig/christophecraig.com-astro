@@ -4,6 +4,7 @@ import CustomHeader from '../../components/CustomHeader.astro';
 import CustomFooter from '../../components/CustomFooter.astro';
 import SpotifyTracks from '../../components/SpotifyTracks.astro';
 import { SpotifyService } from '../../services/spotify';
+import '../../styles/global.css';
 
 // Get language from path parameter
 const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
@@ -25,7 +26,6 @@ const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
     <title>{t.aboutTitle} - Christophe Craig</title>
     <meta name="description" content={t.aboutDescription} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/about` : '/fr/about'} {t} />

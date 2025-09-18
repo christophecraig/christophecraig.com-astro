@@ -3,6 +3,7 @@ import { getTranslations, isValidLanguage } from '../../i18n/utils';
 import CustomHeader from '../../components/CustomHeader.astro';
 import CustomFooter from '../../components/CustomFooter.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import '../../styles/global.css';
 
 // Get language from path parameter
 const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
@@ -41,7 +42,6 @@ const projects = [
     <title>{t.projectsTitle} - Christophe Craig</title>
     <meta name="description" content={t.projectsTitle} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/projects` : '/fr/projects'} {t} />
