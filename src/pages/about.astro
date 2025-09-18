@@ -2,10 +2,19 @@
 import { getTranslations, detectLanguageFromPath } from '../i18n/utils';
 import CustomHeader from '../components/CustomHeader.astro';
 import CustomFooter from '../components/CustomFooter.astro';
+import SpotifyTracks from '../components/SpotifyTracks.astro';
+import { SpotifyService } from '../services/spotify';
 
 // Detect language from path
 const lang = 'fr';
 const t = getTranslations(lang);
+
+// Initialize Spotify service
+const spotifyService = new SpotifyService();
+
+// Fetch user data
+const topTracks = await spotifyService.getUserTopTracks(5);
+const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
 ---
 
 <!doctype html>
@@ -43,6 +52,9 @@ const t = getTranslations(lang);
           <h2>Experience</h2>
           <p>With several years of experience in web development, I've worked on a variety of projects ranging from simple websites to complex web applications. My bicultural background gives me a unique perspective on user experience and design.</p>
         </div>
+        
+        <!-- Spotify Section -->
+        <SpotifyTracks {topTracks} {recentlyPlayed} />
       </section>
     </main>
     

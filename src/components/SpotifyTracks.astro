@@ -2,7 +2,7 @@
 interface Track {
   id: string;
   name: string;
-  artists: string[];
+  artists: { name: string }[];
   album: {
     name: string;
     images: { url: string; width: number; height: number }[];
@@ -38,7 +38,7 @@ console.log({ topTracks })
                 )}
                 <span class="spotify-text">
                   <strong>{track.name}</strong>
-                  <span class="spotify-artist">{track.artists.join(', ')}</span>
+                  <span class="spotify-artist">{track.artists.map(artist => artist.name).join(', ')}</span>
                 </span>
               </a>
             </li>
@@ -66,7 +66,7 @@ console.log({ topTracks })
                 )}
                 <span class="spotify-text">
                   <strong>{track.name}</strong>
-                  <span class="spotify-artist">{track.artists.join(', ')}</span>
+                  <span class="spotify-artist">{track.artists.map(artist => artist.name).join(', ')}</span>
                 </span>
               </a>
             </li>
@@ -83,31 +83,43 @@ console.log({ topTracks })
 
 <style>
   .spotify-section {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border-radius: 8px;
-    background-color: #f8f9fa;
+    margin: 3rem 0;
+    padding: 2rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #dee2e6;
   }
 
   .spotify-section h2 {
     margin-top: 0;
     color: #1db954;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
   }
 
   .spotify-content {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
   }
 
   .spotify-category {
     flex: 1;
     min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
 
   .spotify-category h3 {
     margin-top: 0;
     color: #191414;
+    border-bottom: 2px solid #1db954;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .spotify-list {
@@ -126,24 +138,31 @@ console.log({ topTracks })
     gap: 1rem;
     text-decoration: none;
     color: inherit;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+    padding: 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
   }
 
   .spotify-link:hover {
     background-color: rgba(29, 185, 84, 0.1);
+    transform: translateY(-2px);
   }
 
   .spotify-image {
-    border-radius: 4px;
+    border-radius: 6px;
     object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .spotify-text {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .spotify-text strong {
+    font-size: 1rem;
+    color: #191414;
   }
 
   .spotify-artist {
@@ -154,6 +173,8 @@ console.log({ topTracks })
   .spotify-empty {
     color: #666;
     font-style: italic;
+    text-align: center;
+    padding: 2rem;
   }
 
   @media (max-width: 768px) {
@@ -163,6 +184,14 @@ console.log({ topTracks })
     
     .spotify-category {
       min-width: 100%;
+    }
+    
+    .spotify-section {
+      padding: 1.5rem;
+    }
+    
+    .spotify-section h2 {
+      font-size: 1.5rem;
     }
   }
 </style>
