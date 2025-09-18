@@ -6,9 +6,24 @@ export function getTranslations(lang: Language) {
   return translations[lang];
 }
 
+export function detectLanguageFromPath(pathname: string): Language {
+  // Check if the path starts with /en/
+  if (pathname.startsWith('/en/')) {
+    return 'en';
+  }
+  // Default to French for all other paths
+  return 'fr';
+}
+
 export function detectLanguage(request: Request): Language {
-  // Check URL parameter first
+  // Check URL path first
   const url = new URL(request.url);
+  const langFromPath = detectLanguageFromPath(url.pathname);
+  if (langFromPath === 'en' || langFromPath === 'fr') {
+    return langFromPath;
+  }
+  
+  // Check URL parameter as fallback
   const langParam = url.searchParams.get('lang');
   if (langParam === 'en' || langParam === 'fr') {
     return langParam;
@@ -31,4 +46,14 @@ export function detectLanguage(request: Request): Language {
   
   // Default to French
   return 'fr';
+}
+
+export function getLocalizedPath(path: string, lang: Language): string {
+  // If it's the home page
+  if (path === '/') {
+    return lang === 'en' ? '/en/' : '/';
+  }
+  
+  // For other paths, add /en prefix for English
+  return lang === 'en' ? `/en${path}` : path;
 }

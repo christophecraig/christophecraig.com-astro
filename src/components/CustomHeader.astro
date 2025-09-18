@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLocalizedPath } from '../i18n/utils';
 
 interface Props {
   currentLang: 'en' | 'fr';
@@ -8,28 +9,33 @@ interface Props {
 }
 
 const { currentLang, path, t } = Astro.props;
+
+// Generate localized paths for navigation
+const homePath = getLocalizedPath('/', currentLang);
+const aboutPath = getLocalizedPath('/about', currentLang);
+const projectsPath = getLocalizedPath('/projects', currentLang);
 ---
 
 <header>
   <nav>
     <div class="nav-content">
-      <h2><a href={currentLang === 'en' ? '/?lang=en' : '/?lang=fr'}>Christophe Craig</a></h2>
+      <h2><a href={homePath}>Christophe Craig</a></h2>
       
       <div class="nav-links">
         <a 
-          href={currentLang === 'en' ? '/?lang=en' : '/?lang=fr'} 
+          href={homePath} 
           class={path === '/' ? 'active' : ''}
         >
           {t.home}
         </a>
         <a 
-          href={currentLang === 'en' ? '/about?lang=en' : '/about?lang=fr'} 
+          href={aboutPath} 
           class={path === '/about' ? 'active' : ''}
         >
           {t.about}
         </a>
         <a 
-          href={currentLang === 'en' ? '/projects?lang=en' : '/projects?lang=fr'} 
+          href={projectsPath} 
           class={path === '/projects' ? 'active' : ''}
         >
           {t.projects}
