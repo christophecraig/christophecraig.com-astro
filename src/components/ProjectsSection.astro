@@ -33,6 +33,7 @@ const { t, projects } = Astro.props;
 <style>
   .projects-section {
     margin-bottom: 3rem;
+    width: 100%;
   }
   
   .section-header {
@@ -64,9 +65,17 @@ const { t, projects } = Astro.props;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    width: 100%;
   }
   
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
     .projects-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;

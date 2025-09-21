@@ -65,6 +65,7 @@ const { t } = Astro.props;
 <style>
   .contact-section {
     margin-bottom: 3rem;
+    width: 100%;
   }
   
   .section-header {
@@ -100,6 +101,7 @@ const { t } = Astro.props;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
   }
   
   .cta-buttons {
@@ -109,6 +111,7 @@ const { t } = Astro.props;
     margin-bottom: 2rem;
     max-width: 300px;
     margin: 0 auto 2rem;
+    width: 100%;
   }
   
   .primary-button, .secondary-button {
@@ -122,6 +125,7 @@ const { t } = Astro.props;
     font-weight: 600;
     transition: all 0.2s ease;
     width: 100%;
+    box-sizing: border-box;
   }
   
   .primary-button {
@@ -152,6 +156,7 @@ const { t } = Astro.props;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    width: 100%;
   }
   
   .contact-link {
@@ -169,6 +174,7 @@ const { t } = Astro.props;
     width: 100%;
     max-width: 300px;
     justify-content: center;
+    box-sizing: border-box;
   }
   
   .contact-link:hover {
@@ -194,13 +200,29 @@ const { t } = Astro.props;
     }
   }
   
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
     .section-header h2 {
       font-size: 1.75rem;
     }
     
     .contact-description {
       font-size: 1rem;
+    }
+    
+    .contact-link {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .primary-button, .secondary-button {
+      padding: 0.8rem 1.2rem;
+      font-size: 0.9rem;
+    }
+    
+    .contact-link {
+      padding: 0.8rem 1.2rem;
+      font-size: 0.9rem;
     }
   }
 </style>

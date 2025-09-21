@@ -31,6 +31,7 @@ const { t } = Astro.props;
 <style>
   .about-section {
     margin-bottom: 3rem;
+    width: 100%;
   }
   
   .section-header {
@@ -63,6 +64,11 @@ const { t } = Astro.props;
     grid-template-columns: 1fr;
     gap: 2rem;
     align-items: center;
+    width: 100%;
+  }
+  
+  .about-text {
+    width: 100%;
   }
   
   .about-text p {
@@ -75,6 +81,7 @@ const { t } = Astro.props;
   .about-image {
     display: flex;
     justify-content: center;
+    width: 100%;
   }
   
   .placeholder-image {
@@ -107,6 +114,11 @@ const { t } = Astro.props;
     
     .about-text p {
       font-size: 1rem;
+    }
+    
+    .placeholder-image {
+      width: 150px;
+      height: 150px;
     }
   }
 </style>
