@@ -101,6 +101,8 @@ const isActive = (linkPath: string) => path === linkPath;
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .nav-content {
@@ -110,11 +112,14 @@ const isActive = (linkPath: string) => path === linkPath;
     padding: 1rem 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   h2 {
     margin: 0;
     font-size: 1.25rem;
+    box-sizing: border-box;
   }
   
   h2 a,
@@ -132,6 +137,7 @@ const isActive = (linkPath: string) => path === linkPath;
     cursor: pointer;
     padding: 0.25rem;
     z-index: 101;
+    box-sizing: border-box;
   }
   
   .hamburger-line {
@@ -140,12 +146,14 @@ const isActive = (linkPath: string) => path === linkPath;
     background-color: var(--accent-dark);
     margin: 3px 0;
     transition: 0.3s;
+    box-sizing: border-box;
   }
   
   .nav-links {
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    box-sizing: border-box;
   }
   
   .nav-links a {
@@ -155,6 +163,7 @@ const isActive = (linkPath: string) => path === linkPath;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
+    box-sizing: border-box;
   }
   
   .nav-links a:hover,
@@ -182,6 +191,7 @@ const isActive = (linkPath: string) => path === linkPath;
       transition: right 0.3s ease;
       box-shadow: -2px 0 10px rgba(var(--black), 10%);
       z-index: 100;
+      box-sizing: border-box;
     }
     
     .nav-links-open {
