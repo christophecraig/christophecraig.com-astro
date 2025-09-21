@@ -62,7 +62,7 @@ export const translations = {
     
     // About section
     aboutTitle: 'Mon approche',
-    aboutDescription: 'Je suis développeur full stack avec de l\'expérience dans des startups et des grandes entreprises. J\'aime travailler sur des projets qui ont un vrai impact, que ce soit en améliorant des outils internes pour une équipe ou en créant des produits pour les clients. Mon parcours entre la Nouvelle-Zélande et la France me donne une perspective unique sur la collaboration et la résolution de problèmes. Je crois en l\'écriture de code clair et maintenable, et en travaillant en étroite collaboration avec les équipes pour livrer des solutions dont tout le monde peut être fier.',
+    aboutDescription: 'Je suis développeur full stack. J\'aime travailler sur des projets qui ont un vrai impact, que ce soit en améliorant des outils internes pour une équipe ou en créant des produits pour les clients. Mon parcours entre la Nouvelle-Zélande et la France me donne une perspective unique sur la collaboration et la résolution de problèmes. Je crois en l\'écriture de code clair et maintenable, et en travaillant en étroite collaboration avec les équipes pour livrer des solutions dont tout le monde peut être fier.',
     
     // Projects section
     projectsTitle: 'Quelques projets',
