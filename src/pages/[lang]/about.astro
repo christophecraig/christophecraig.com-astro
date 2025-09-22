@@ -2,20 +2,11 @@
 import { getTranslations, isValidLanguage } from '../../i18n/utils';
 import CustomHeader from '../../components/CustomHeader.astro';
 import CustomFooter from '../../components/CustomFooter.astro';
-import SpotifyTracks from '../../components/SpotifyTracks.astro';
-import { SpotifyService } from '../../services/spotify';
 import '../../styles/global.css';
 
 // Get language from path parameter
 const lang = isValidLanguage(Astro.params.lang) ? Astro.params.lang : 'fr';
 const t = getTranslations(lang);
-
-// Initialize Spotify service
-const spotifyService = new SpotifyService();
-
-// Fetch user data
-const topTracks = await spotifyService.getUserTopTracks(5);
-const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
 ---
 
 <!doctype html>
@@ -64,9 +55,6 @@ const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
               <p>{t.greatCodeQuote}</p>
             </blockquote>
           </div>
-          
-          <!-- Spotify Section -->
-          <SpotifyTracks {topTracks} {recentlyPlayed} />
         </section>
       </div>
     </main>

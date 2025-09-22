@@ -6,12 +6,21 @@ import Hero from '../components/Hero.astro';
 import AboutSection from '../components/AboutSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
 import ContactSection from '../components/ContactSection.astro';
+import SpotifyTracks from '../components/SpotifyTracks.astro';
+import { SpotifyService } from '../services/spotify';
 import ApprentisAgrisImage from '../assets/logo-apprentis-agris.svg';
 import '../styles/global.css';
 
 // Set language to Fr (default)
 const lang = 'fr';
 const t = getTranslations(lang);
+
+// Initialize Spotify service
+const spotifyService = new SpotifyService();
+
+// Fetch user data
+const topTracks = await spotifyService.getUserTopTracks(5);
+const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
 
 // Define projects data
 const projects = [
@@ -54,6 +63,7 @@ const projects = [
       <div class="container">
         <Hero {t} currentLang={lang} />
         <AboutSection {t} />
+        <SpotifyTracks {topTracks} {recentlyPlayed} />
         <ProjectsSection {t} {projects} />
         <ContactSection {t} />
       </div>
