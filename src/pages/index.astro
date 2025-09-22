@@ -51,10 +51,12 @@ const projects = [
   <body>
     <CustomHeader currentLang={lang} path="/" {t} />
     <main>
-      <Hero {t} currentLang={lang} />
-      <AboutSection {t} />
-      <ProjectsSection {t} {projects} />
-      <ContactSection {t} />
+      <div class="container">
+        <Hero {t} currentLang={lang} />
+        <AboutSection {t} />
+        <ProjectsSection {t} {projects} />
+        <ContactSection {t} />
+      </div>
     </main>
     
     <CustomFooter {t} currentLang={lang} />

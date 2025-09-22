@@ -31,42 +31,44 @@ const recentlyPlayed = await spotifyService.getUserRecentlyPlayed(5);
     <CustomHeader currentLang={lang} path={Astro.params.lang ? `/${Astro.params.lang}/about` : '/fr/about'} {t} />
     
     <main>
-      <section class="about-page">
-        <div class="section-header">
-          <h1>{t.aboutTitle}</h1>
-        </div>
-        
-        <div class="about-content">
-          <p>{t.aboutDescription}</p>
+      <div class="container">
+        <section class="about-page">
+          <div class="section-header">
+            <h1>{t.aboutTitle}</h1>
+          </div>
           
-          <h2>{t.coreCompetencies}</h2>
-          <ul>
-            <li><strong>{t.fullStackDevelopment}</strong> - {t.fullStackDevelopmentDesc}</li>
-            <li><strong>{t.modernJavaScript}</strong> - {t.modernJavaScriptDesc}</li>
-            <li><strong>{t.cmsExpertise}</strong> - {t.cmsExpertiseDesc}</li>
-            <li><strong>{t.performanceOptimization}</strong> - {t.performanceOptimizationDesc}</li>
-            <li><strong>{t.responsiveDesign}</strong> - {t.responsiveDesignDesc}</li>
-            <li><strong>{t.agileMethodologies}</strong> - {t.agileMethodologiesDesc}</li>
-          </ul>
+          <div class="about-content">
+            <p>{t.aboutDescription}</p>
+            
+            <h2>{t.coreCompetencies}</h2>
+            <ul>
+              <li><strong>{t.fullStackDevelopment}</strong> - {t.fullStackDevelopmentDesc}</li>
+              <li><strong>{t.modernJavaScript}</strong> - {t.modernJavaScriptDesc}</li>
+              <li><strong>{t.cmsExpertise}</strong> - {t.cmsExpertiseDesc}</li>
+              <li><strong>{t.performanceOptimization}</strong> - {t.performanceOptimizationDesc}</li>
+              <li><strong>{t.responsiveDesign}</strong> - {t.responsiveDesignDesc}</li>
+              <li><strong>{t.agileMethodologies}</strong> - {t.agileMethodologiesDesc}</li>
+            </ul>
+            
+            <h2>{t.whyWorkWithMe}</h2>
+            <p>{t.whyWorkWithMeDesc}</p>
+            
+            <ul>
+              <li><strong>{t.thinkGlobally}</strong> - {t.thinkGloballyDesc}</li>
+              <li><strong>{t.communicateEffectively}</strong> - {t.communicateEffectivelyDesc}</li>
+              <li><strong>{t.deliverValue}</strong> - {t.deliverValueDesc}</li>
+              <li><strong>{t.adaptQuickly}</strong> - {t.adaptQuicklyDesc}</li>
+            </ul>
+            
+            <blockquote>
+              <p>{t.greatCodeQuote}</p>
+            </blockquote>
+          </div>
           
-          <h2>{t.whyWorkWithMe}</h2>
-          <p>{t.whyWorkWithMeDesc}</p>
-          
-          <ul>
-            <li><strong>{t.thinkGlobally}</strong> - {t.thinkGloballyDesc}</li>
-            <li><strong>{t.communicateEffectively}</strong> - {t.communicateEffectivelyDesc}</li>
-            <li><strong>{t.deliverValue}</strong> - {t.deliverValueDesc}</li>
-            <li><strong>{t.adaptQuickly}</strong> - {t.adaptQuicklyDesc}</li>
-          </ul>
-          
-          <blockquote>
-            <p>{t.greatCodeQuote}</p>
-          </blockquote>
-        </div>
-        
-        <!-- Spotify Section -->
-        <SpotifyTracks {topTracks} {recentlyPlayed} />
-      </section>
+          <!-- Spotify Section -->
+          <SpotifyTracks {topTracks} {recentlyPlayed} />
+        </section>
+      </div>
     </main>
     
     <CustomFooter {t} currentLang={lang} />
