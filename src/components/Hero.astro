@@ -1,9 +1,16 @@
 ---
+import { getLocalizedPath } from '../i18n/utils';
+
 interface Props {
   t: any;
+  currentLang?: 'en' | 'fr';
 }
 
-const { t } = Astro.props;
+const { t, currentLang = 'en' } = Astro.props;
+
+// Generate localized paths for navigation
+const projectsPath = getLocalizedPath('/projects', currentLang);
+const contactPath = getLocalizedPath('/#contact', currentLang); // Still use anchor for contact since there's no separate page
 ---
 
 <section class="hero">
@@ -15,8 +22,8 @@ const { t } = Astro.props;
       <span class="age">{t.age}</span>
     </div>
     <div class="hero-cta">
-      <a href="#contact" class="cta-button">Get In Touch</a>
-      <a href="#projects" class="cta-secondary">View My Work</a>
+      <a href={contactPath} class="cta-button">Get In Touch</a>
+      <a href={projectsPath} class="cta-secondary">View My Work</a>
     </div>
   </div>
   
