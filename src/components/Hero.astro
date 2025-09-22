@@ -10,7 +10,7 @@ const { t, currentLang = 'en' } = Astro.props;
 
 // Generate localized paths for navigation
 const projectsPath = getLocalizedPath('/projects', currentLang);
-const contactPath = getLocalizedPath('/#contact', currentLang); // Still use anchor for contact since there's no separate page
+const contactPath = getLocalizedPath('#contact', currentLang); // Still use anchor for contact since there's no separate page
 ---
 
 <section class="hero">
