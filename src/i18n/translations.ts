@@ -32,6 +32,35 @@ export const translations = {
     strapiNextTitle: 'Enterprise Content Hub',
     strapiNextDescription: 'A content management system that works across multiple platforms. Built with Strapi CMS and Next.js, it allows teams to manage content in one place and publish it to websites, mobile apps, and marketing channels. Role-based workflows make it easy to manage permissions.',
     
+    // About page
+    coreCompetencies: 'Core Competencies',
+    fullStackDevelopment: 'Full Stack Development',
+    fullStackDevelopmentDesc: 'End-to-end solutions from concept to deployment',
+    modernJavaScript: 'Modern JavaScript Frameworks',
+    modernJavaScriptDesc: 'React, Next.js, Node.js, TypeScript',
+    cmsExpertise: 'CMS Expertise',
+    cmsExpertiseDesc: 'WordPress customization, Strapi headless CMS implementation',
+    performanceOptimization: 'Performance Optimization',
+    performanceOptimizationDesc: 'Lightning-fast, SEO-optimized applications',
+    responsiveDesign: 'Responsive Design',
+    responsiveDesignDesc: 'Pixel-perfect experiences across all devices',
+    agileMethodologies: 'Agile Methodologies',
+    agileMethodologiesDesc: 'Collaborative development with rapid iteration',
+    whyWorkWithMe: 'Why Work With Me?',
+    whyWorkWithMeDesc: 'As a developer with international experience spanning both European and Pacific markets, I bring a unique blend of technical precision and cultural awareness to every project. My bicultural background enables me to:',
+    thinkGlobally: 'Think Globally',
+    thinkGloballyDesc: 'Design solutions that work seamlessly across diverse markets',
+    communicateEffectively: 'Communicate Effectively',
+    communicateEffectivelyDesc: 'Bridge technical concepts between stakeholders and development teams',
+    deliverValue: 'Deliver Value',
+    deliverValueDesc: 'Focus on business outcomes, not just technical implementation',
+    adaptQuickly: 'Adapt Quickly',
+    adaptQuicklyDesc: 'Navigate different business cultures and workflows with ease',
+    greatCodeQuote: '"Great code solves problems. Great development creates opportunities."',
+    
+    // Projects page
+    projectsIntro: 'Here are some of the projects I\'ve worked on. Each project represents a unique challenge and solution in web development.',
+    
     // Contact section
     contactTitle: 'Want to work together?',
     contactDescription: 'I\'m always interested in hearing about new projects and opportunities. Whether you need help with a new application, want to improve an existing system, or just want a second opinion on a technical challenge, feel free to reach out.',
@@ -79,6 +108,35 @@ export const translations = {
     
     strapiNextTitle: 'Hub de Contenu Entreprise',
     strapiNextDescription: 'Un système de gestion de contenu qui fonctionne sur plusieurs plateformes. Construit avec Strapi CMS et Next.js, il permet aux équipes de gérer le contenu en un seul endroit et de le publier sur des sites web, des applications mobiles et des canaux marketing. Les flux de travail basés sur les rôles facilitent la gestion des permissions.',
+    
+    // About page
+    coreCompetencies: 'Compétences clés',
+    fullStackDevelopment: 'Développement Full Stack',
+    fullStackDevelopmentDesc: 'Solutions de bout en bout, du concept au déploiement',
+    modernJavaScript: 'Frameworks JavaScript Modernes',
+    modernJavaScriptDesc: 'React, Next.js, Node.js, TypeScript',
+    cmsExpertise: 'Expertise CMS',
+    cmsExpertiseDesc: 'Personnalisation WordPress, implémentation Strapi headless CMS',
+    performanceOptimization: 'Optimisation des Performances',
+    performanceOptimizationDesc: 'Applications ultra-rapides et optimisées pour le SEO',
+    responsiveDesign: 'Design Responsive',
+    responsiveDesignDesc: 'Expériences parfaites sur tous les appareils',
+    agileMethodologies: 'Méthodologies Agiles',
+    agileMethodologiesDesc: 'Développement collaboratif avec itération rapide',
+    whyWorkWithMe: 'Pourquoi travailler avec moi ?',
+    whyWorkWithMeDesc: 'En tant que développeur avec une expérience internationale couvrant les marchés européens et pacifiques, j'apporte un mélange unique de précision technique et de sensibilité culturelle à chaque projet. Mon parcours biculturel me permet de :',
+    thinkGlobally: 'Penser globalement',
+    thinkGloballyDesc: 'Concevoir des solutions qui fonctionnent de manière transparente sur divers marchés',
+    communicateEffectively: 'Communiquer efficacement',
+    communicateEffectivelyDesc: 'Faire le lien entre les concepts techniques et les équipes de développement',
+    deliverValue: 'Livrer de la valeur',
+    deliverValueDesc: 'Se concentrer sur les résultats commerciaux, pas seulement sur l\'implémentation technique',
+    adaptQuickly: 'S\'adapter rapidement',
+    adaptQuicklyDesc: 'Naviguer facilement entre différentes cultures et méthodes de travail',
+    greatCodeQuote: '"Un bon code résout des problèmes. Un bon développement crée des opportunités."',
+    
+    // Projects page
+    projectsIntro: 'Voici quelques-uns des projets sur lesquels j\'ai travaillé. Chaque projet représente un défi unique et une solution en développement web.',
     
     // Contact section
     contactTitle: 'Envie de collaborer ?',

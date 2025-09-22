@@ -40,7 +40,7 @@ const projects = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{t.projectsTitle} - Christophe Craig</title>
-    <meta name="description" content="Explore Christophe Craig's featured projects including the Apprentisagris Platform, Crypto Prices Tracker, and Enterprise Content Hub. See how modern web technologies solve real business challenges." />
+    <meta name="description" content={t.projectsIntro} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
@@ -53,7 +53,7 @@ const projects = [
         </div>
         
         <div class="projects-intro">
-          <p>Here are some of the projects I've worked on. Each project represents a unique challenge and solution in web development.</p>
+          <p>{t.projectsIntro}</p>
         </div>
         
         <div class="projects-grid">
