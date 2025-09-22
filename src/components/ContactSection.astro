@@ -55,6 +55,9 @@ const { t } = Astro.props;
   .contact-section {
     margin-bottom: 3rem;
     width: 100%;
+    padding: 2rem 1rem;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(236, 248, 255, 0.5));
+    border-radius: 20px;
   }
   
   .section-header {
@@ -77,9 +80,9 @@ const { t } = Astro.props;
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
-    height: 3px;
-    background-color: var(--accent);
-    border-radius: 3px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mint-green), var(--soft-blue));
+    border-radius: 2px;
   }
   
   .contact-description {
@@ -109,35 +112,37 @@ const { t } = Astro.props;
     justify-content: center;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     width: 100%;
     box-sizing: border-box;
+    border: none;
   }
   
   .primary-button {
-    background: var(--accent);
-    color: white;
-    box-shadow: var(--box-shadow);
+    background: linear-gradient(135deg, var(--mint-green), var(--light-coral));
+    color: #191414;
+    box-shadow: 0 4px 15px rgba(152, 216, 200, 0.3);
   }
   
   .primary-button:hover {
-    background: var(--accent-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--gray), 25%), 0 12px 32px rgba(var(--gray), 33%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(152, 216, 200, 0.5);
+    background: linear-gradient(135deg, var(--soft-blue), var(--light-lavender));
   }
   
   .secondary-button {
-    background: white;
-    color: var(--accent-dark);
-    border: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--pale-yellow), var(--soft-blue));
+    color: #191414;
+    box-shadow: 0 4px 15px rgba(174, 214, 241, 0.3);
   }
   
   .secondary-button:hover {
-    background: rgba(var(--accent), 0.1);
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(174, 214, 241, 0.5);
+    background: linear-gradient(135deg, var(--light-coral), var(--mint-green));
   }
   
   .contact-methods {
@@ -153,22 +158,24 @@ const { t } = Astro.props;
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-    color: var(--accent-dark);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 242, 204, 0.5));
+    border-radius: 50px;
+    color: #191414;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     width: 100%;
     max-width: 300px;
     justify-content: center;
     box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(152, 216, 200, 0.2);
+    border: 1px solid rgba(152, 216, 200, 0.3);
   }
   
   .contact-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--gray), 25%), 0 12px 32px rgba(var(--gray), 33%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(152, 216, 200, 0.4);
+    background: linear-gradient(135deg, var(--mint-green), var(--pale-yellow));
   }
   
   @media (min-width: 768px) {
