@@ -34,6 +34,9 @@ const { t, projects } = Astro.props;
   .projects-section {
     margin-bottom: 3rem;
     width: 100%;
+    padding: 2rem 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(236, 248, 255, 0.5));
+    border-radius: 20px;
   }
   
   .section-header {
@@ -56,9 +59,9 @@ const { t, projects } = Astro.props;
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
-    height: 3px;
-    background-color: var(--accent);
-    border-radius: 3px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mint-green), var(--soft-blue));
+    border-radius: 2px;
   }
   
   .projects-grid {
@@ -66,6 +69,7 @@ const { t, projects } = Astro.props;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     width: 100%;
+    padding: 0 1rem;
   }
   
   @media (max-width: 768px) {

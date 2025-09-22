@@ -45,9 +45,10 @@ const contactPath = getLocalizedPath('#contact', currentLang); // Still use anch
     text-align: center;
     margin-bottom: 3rem;
     padding: 2rem 1rem;
-    background: linear-gradient(135deg, rgba(var(--accent), 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(var(--mint-green), 0.3) 0%, rgba(255, 255, 255, 0.8) 100%);
     border-radius: 16px;
     box-shadow: var(--box-shadow);
+    border: 1px solid rgba(152, 216, 200, 0.2);
   }
   
   .hero-content {
@@ -85,6 +86,7 @@ const contactPath = getLocalizedPath('#contact', currentLang); // Still use anch
     border-radius: 30px;
     box-shadow: 0 2px 8px rgba(var(--gray), 15%);
     font-weight: 500;
+    border: 1px solid rgba(152, 216, 200, 0.3);
   }
   
   .hero-cta {
@@ -98,33 +100,37 @@ const contactPath = getLocalizedPath('#contact', currentLang); // Still use anch
   .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
-    background: var(--accent);
-    color: white;
-    border-radius: 30px;
+    background: linear-gradient(135deg, var(--mint-green), var(--light-coral));
+    color: #191414;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
-    transition: all 0.2s ease;
-    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(152, 216, 200, 0.3);
     width: fit-content;
+    border: none;
   }
   
   .cta-button:hover {
-    background: var(--accent-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--gray), 25%), 0 12px 32px rgba(var(--gray), 33%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(152, 216, 200, 0.5);
+    background: linear-gradient(135deg, var(--soft-blue), var(--light-lavender));
   }
   
   .cta-secondary {
     color: var(--accent-dark);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
   }
   
   .cta-secondary:hover {
-    color: var(--accent);
-    text-decoration: underline;
+    background-color: rgba(152, 216, 200, 0.2);
+    transform: translateY(-2px);
+    text-decoration: none;
   }
   
   .hero-image {

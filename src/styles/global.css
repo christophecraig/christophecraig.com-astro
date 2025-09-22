@@ -19,6 +19,13 @@
 	--box-shadow:
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
 		rgba(var(--gray), 33%);
+	
+	/* Sean Wotherspoon inspired pastel colors */
+	--mint-green: #98D8C8;
+	--light-coral: #F7DC6F;
+	--pale-yellow: #FFF2CC;
+	--soft-blue: #AED6F1;
+	--light-lavender: #D7BDE2;
 }
 
 /* Enable smooth scrolling for anchor links */
@@ -51,7 +58,14 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+	
+	/* Add a subtle background pattern using our new colors */
+	background-image: 
+		radial-gradient(circle at 10% 20%, rgba(152, 216, 200, 0.1) 0%, transparent 20%),
+		radial-gradient(circle at 90% 80%, rgba(174, 214, 241, 0.1) 0%, transparent 20%),
+		radial-gradient(circle at 50% 50%, rgba(215, 189, 226, 0.1) 0%, transparent 30%);
 }
+
 main {
 	width: 100%;
 	max-width: 100%;
@@ -67,97 +81,82 @@ main {
 	padding: 0 1em;
 }
 
-@media (min-width: 1200px) {
-	main {
-		padding: 3em 2em;
-	}
-	
-	.container {
-		padding: 0 2em;
-	}
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
+/* Add playful hover effects to links */
 a {
-	color: var(--accent);
+	transition: all 0.3s ease;
+	border-radius: 4px;
+	padding: 0 2px;
 }
+
 a:hover {
-	color: var(--accent);
+	background-color: rgba(152, 216, 200, 0.2);
+	transform: translateY(-2px);
+	text-decoration: none;
 }
-p {
-	margin-bottom: 1em;
+
+/* Add some playful styling to headers */
+h1, h2, h3, h4, h5, h6 {
+	position: relative;
 }
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
+
+h1::after, h2::after {
+	content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 50px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--mint-green), var(--soft-blue));
 	border-radius: 2px;
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
+
+h2::after {
+	width: 40px;
+	height: 3px;
 }
-pre > code {
-	all: unset;
+
+/* Playful section dividers */
+.section-header {
+	text-align: center;
+	margin-bottom: 2rem;
+	position: relative;
 }
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+
+.section-header::after {
+	content: "";
+	display: block;
+	width: 80px;
+	height: 4px;
+	background: linear-gradient(90deg, var(--light-coral), var(--pale-yellow));
+	border-radius: 2px;
+	margin: 1rem auto 0;
 }
-hr {
+
+/* Add playful buttons */
+button, .cta-button, .project-link {
+	border-radius: 50px !important; /* Make buttons more rounded */
+	background: linear-gradient(135deg, var(--mint-green), var(--light-coral)) !important;
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	color: #191414 !important;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(152, 216, 200, 0.3);
+	padding: 12px 24px;
+	display: inline-block;
+	text-decoration: none;
 }
+
+button:hover, .cta-button:hover, .project-link:hover {
+	transform: translateY(-3px) scale(1.05);
+	box-shadow: 0 6px 20px rgba(152, 216, 200, 0.5);
+	background: linear-gradient(135deg, var(--soft-blue), var(--light-lavender)) !important;
+}
+
 @media (max-width: 720px) {
 	body {
 		font-size: 18px;
 	}
+	
 	main {
 		padding: 1em;
 	}
