@@ -124,7 +124,7 @@ export const translations = {
     agileMethodologies: 'Méthodologies Agiles',
     agileMethodologiesDesc: 'Développement collaboratif avec itération rapide',
     whyWorkWithMe: 'Pourquoi travailler avec moi ?',
-    whyWorkWithMeDesc: 'En tant que développeur avec une expérience internationale couvrant les marchés européens et pacifiques, j'apporte un mélange unique de précision technique et de sensibilité culturelle à chaque projet. Mon parcours biculturel me permet de :',
+    whyWorkWithMeDesc: 'En tant que développeur avec une expérience internationale couvrant les marchés européens et pacifiques, j\'apporte un mélange unique de précision technique et de sensibilité culturelle à chaque projet. Mon parcours biculturel me permet de :',
     thinkGlobally: 'Penser globalement',
     thinkGloballyDesc: 'Concevoir des solutions qui fonctionnent de manière transparente sur divers marchés',
     communicateEffectively: 'Communiquer efficacement',
