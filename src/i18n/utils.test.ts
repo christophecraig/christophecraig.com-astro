@@ -4,12 +4,12 @@ import { getTranslations, detectLanguageFromPath, isValidLanguage } from './util
 describe('i18n utils', () => {
   it('should return English translations', () => {
     const translations = getTranslations('en');
-    expect(translations.greeting).toBe("Hi, I'm Christophe Craig");
+    expect(translations.greeting).toBe("Hi, I'm Christophe");
   });
 
   it('should return French translations', () => {
     const translations = getTranslations('fr');
-    expect(translations.greeting).toBe('Bonjour, je suis Christophe Craig');
+    expect(translations.greeting).toBe('Salut, je suis Christophe');
   });
 
   it('should detect English language from path', () => {

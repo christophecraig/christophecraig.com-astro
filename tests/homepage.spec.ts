@@ -7,7 +7,8 @@ test.describe('Homepage', () => {
 
   test('should have correct title and heading', async ({ page }) => {
     await expect(page).toHaveTitle(/Christophe Craig/);
-    await expect(page.getByText('Christophe Craig')).toBeVisible();
+    // Be more specific by targeting the header link element
+    await expect(page.getByRole('link', { name: 'Christophe Craig' })).toBeVisible();
   });
 
   test('should display hero section with greeting', async ({ page }) => {
@@ -22,20 +23,21 @@ test.describe('Homepage', () => {
     const header = page.locator('header');
     await expect(header.getByText('Accueil')).toBeVisible();
     await expect(header.getByText('À propos')).toBeVisible();
-    await expect(header.getByText('Réalisations')).toBeVisible();
-    await expect(header.getByText('Me contacter')).toBeVisible();
+    await expect(header.getByText('Projets')).toBeVisible();
+    await expect(header.getByText('Discutons')).toBeVisible();
   });
 
   test('should have all main sections', async ({ page }) => {
-    await expect(page.getByText('Créer un Impact à Travers le Code')).toBeVisible();
-    await expect(page.getByText('Projets Réalisés')).toBeVisible();
-    await expect(page.getByText('Prêt à Transformer Vos Idées en Réalité ?')).toBeVisible();
+    await expect(page.getByText('Salut, je suis Christophe')).toBeVisible();
+    await expect(page.getByText('Quelques projets')).toBeVisible();
+    await expect(page.getByText('Envie de collaborer ?')).toBeVisible();
   });
 
   test('should have contact buttons', async ({ page }) => {
     const contactSection = page.locator('.contact-section');
-    await expect(contactSection.getByText('Send Me an Email')).toBeVisible();
-    await expect(contactSection.getByText('Schedule a Call')).toBeVisible();
+    await expect(contactSection.getByText('contact@christophecraig.com')).toBeVisible();
+    await expect(contactSection.getByText('GitHub')).toBeVisible();
+    await expect(contactSection.getByText('LinkedIn')).toBeVisible();
   });
 
   test('should have social media links', async ({ page }) => {
