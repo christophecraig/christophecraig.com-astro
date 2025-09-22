@@ -23,7 +23,7 @@ export const translations = {
     
     // Project descriptions
     apprentisagrisTitle: 'Apprentisagris Platform',
-    apprentisagrisDescription: 'A WordPress-based learning platform for agricultural apprentices. I built custom features that helped streamline administrative tasks and made it easier for apprentices to access learning materials. The platform now supports over 500 users.',
+    apprentisagrisDescription: 'A WordPress-based learning platform for agricultural apprentices. I built custom features that helped streamline administrative tasks and made it easier for apprentices to access learning materials.',
     
     croTitle: 'Crypto Prices Tracker',
     croDescription: 'A real-time dashboard for tracking cryptocurrency prices, built with React. It pulls data from the CoinGecko API to show live prices and market trends. Great for anyone who wants to keep an eye on their crypto investments.',
@@ -71,7 +71,7 @@ export const translations = {
     
     // Project descriptions
     apprentisagrisTitle: 'Plateforme Apprentisagris',
-    apprentisagrisDescription: 'Une plateforme d\'apprentissage basée sur WordPress pour des apprentis agricoles. J\'ai développé des fonctionnalités sur mesure qui ont aidé à simplifier les tâches administratives et facilité l\'accès aux ressources pédagogiques pour les apprentis. La plateforme supporte maintenant plus de 500 utilisateurs.',
+    apprentisagrisDescription: 'Une plateforme d\'apprentissage basée sur WordPress pour des apprentis agricoles. J\'ai développé des fonctionnalités sur mesure qui ont aidé à simplifier les tâches administratives et facilité l\'accès aux ressources pédagogiques pour les apprentis.',
     
     croTitle: 'Suivi des Prix Crypto',
     croDescription: 'Un tableau de bord en temps réel pour suivre les prix des cryptomonnaies, construit avec React. Il récupère les données depuis l\'API CoinGecko pour afficher les prix en direct et les tendances du marché. Parfait pour garder un œil sur ses investissements crypto.',
